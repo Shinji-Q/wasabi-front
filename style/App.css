@@ -1,0 +1,63 @@
+
+view {
+  margin: 0px;
+}
+
+#mainApp {
+
+  background-color: #FFFFFF;
+  margin:100px auto;
+  width:90%;
+  padding: 10px;
+  border-radius: 15px;
+  height:700px;
+
+}
+
+#wasabiLogo{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width: 15%;
+  margin: 0 auto;
+}
+#logoMenu{
+  float:right;
+  width:5%;
+}
+
+.topbar {
+  position:fixed;
+  top:0px;
+  left:0px;
+  overflow: hidden;
+  padding: 0px;
+  width:100%;
+  background-color: #333;
+  border-radius: 0px 0px 10px 10px;
+  height:75px;
+}
+
+.menu{
+  padding: 0px 5%;
+}
+
+.topbar a {
+  margin:10px 0px 0px 0px;
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font:bold 17pt arial;
+}
+
+.topbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topbar a.active {
+  background-color: #04AA6D;
+  color: white;
+}
