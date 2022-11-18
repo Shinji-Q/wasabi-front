@@ -1,0 +1,28 @@
+.errorPage {
+    position: relative;
+    background-color: white;
+    padding: 10px;
+    border-radius: 15px;
+    color: black;
+    margin:50px;
+    min-width: 500px;
+    text-align: center;
+    height: 500px;
+    font: normal 14px arial;
+}
+
+h1 {
+    margin: 10px auto;
+}
+
+#returnHome {
+    position:absolute;
+    margin-left: auto;
+    margin-right: auto;
+
+    left:50%;
+    right: auto;
+    transform:translate(-50%, -50%);
+    bottom:0px;
+
+}

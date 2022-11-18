@@ -1,29 +1,5 @@
-
 view {
   margin: 0px;
-}
-
-#mainApp {
-
-  background-color: #FFFFFF;
-  margin:100px auto;
-  width:90%;
-  padding: 10px;
-  border-radius: 15px;
-  height:700px;
-
-}
-
-#wasabiLogo{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  width: 15%;
-  margin: 0 auto;
-}
-#logoMenu{
-  float:right;
-  width:5%;
 }
 
 .topbar {
@@ -36,20 +12,32 @@ view {
   background-color: #333;
   border-radius: 0px 0px 10px 10px;
   height:75px;
+  transition: top 0.2s ease-in-out;
 }
 
 .menu{
   padding: 0px 5%;
 }
 
+.bottomText {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translate(-50%, 0);
+
+}
+
 .topbar a {
-  margin:10px 0px 0px 0px;
+  position: relative;
+  margin:0px 0px 0px 0px;
   float: left;
   color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
+  padding:0px 10px;
   text-decoration: none;
+  text-align:center;
   font:bold 17pt arial;
+  height:75px;
+  width: 100px;
 }
 
 .topbar a:hover {
@@ -61,3 +49,22 @@ view {
   background-color: #04AA6D;
   color: white;
 }
+
+#logoMenu{
+  position:absolute;
+  bottom: 10px;
+  right: 50px;
+  width:5%;
+}
+
+#content {
+  position:relative;
+  background-color: #ee753d;
+  margin:100px auto;
+  width:90%;
+  min-width:450px;
+  max-width: 1000px;
+  padding: 3px;
+  border-radius: 13px;
+}
+

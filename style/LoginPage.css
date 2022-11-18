@@ -1,0 +1,49 @@
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 10px 0px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+
+#loginPanel {
+    position: absolute;
+    border-radius: 0px 10px 10px 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+
+    max-width: 450px;
+    width: auto;
+    height: auto;
+    background-color: #EBEBEB;
+    align-items:center;
+    align-items:center;
+}
+
+#loginScreen {
+    height: 100%;
+}
+
+#BGLogin {
+    object-fit:cover;
+    object-position:0 0;
+    width: 100%;
+    max-width:90%;
+    height:750px;
+    border-radius: 10px;
+}
+
+#logoLogin{
+    display:block;
+    width: 60%;
+    margin: auto;
+    padding:5%;
+}
+
+#formContainer {
+    margin: 15px;
+}
+
