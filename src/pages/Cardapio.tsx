@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, Outlet, useLoaderData} from "react-router-dom";
 import { getCategorias, categoria, prato, getPratos} from "../wasabiDB";
 import { Categoria } from "./Cardapio/Categoria";
 import "../../style/Cardapio.css"
+import { api } from "../shared/services/api";
 
 
 export async function loader():Promise<categoria[]> {
@@ -44,6 +45,23 @@ export function Cardapio(){
 
 }
 
+export function TestePage(){
+    getPratos().then(prato => {
+        console.log(prato.pop());
+    })
+
+    useEffect(() => {
+        api.get("produto/1").then(response => {
+            console.log(response);
+        })
+    },[]);
+    return (
+        <>
+        <p>aaaa</p>
+            
+        </>
+    )
+}
 
 type CatProps = {
     categoria?: categoria;
