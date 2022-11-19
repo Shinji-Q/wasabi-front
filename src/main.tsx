@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { Children } from 'react';
 import ReactDOM from 'react-dom/client';
 import { App } from './App';
 import { Cart } from './pages/Cart';
 import { LoginPage } from './pages/LoginPage';
 import { Home } from './pages/Home';
+import { Cardapio, loader as cardapioLoader } from './pages/Cardapio';
 import { ErrorPage } from "./pages/ErrorPage";
 import wasabiLogo from './assets/wasabi-logo.png'
 
@@ -32,6 +33,16 @@ const router = createBrowserRouter([
       {
         path : "/login",
         element: <LoginPage />
+      },
+      {
+        path: "/cardapio",
+        element: <Cardapio />,
+        loader: cardapioLoader,
+        children: [{
+          path: "/cardapio/:categoria_id",
+          element: <p />,
+        }
+        ]
       },
     ]
   },

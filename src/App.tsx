@@ -16,6 +16,7 @@ export class App extends React.Component{
       <div id="content">
         <Outlet />
       </div>
+      {/* static top pannel */}
       <section className="topbar" >
         <section className="menu">
           <img src={wasabiLogo} alt="wasabiLogo" id="logoMenu"/>
