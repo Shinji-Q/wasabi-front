@@ -1,0 +1,30 @@
+
+#menuCategorias {
+    background-color:black;
+    color: white;
+    width:150px;
+    border-radius: 15px;
+    height:500px;
+}
+
+.categoria {
+    background-color: #eee;
+    color: black;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+}
+
+.categoria:hover{
+
+    background-color: rgb(109, 106, 106);
+
+}
+
+#primeiro{
+    border-radius: 15px 15px 0 0;
+}
+
+#ultimo{
+    border-radius: 0 0 15px 15px;
+}
