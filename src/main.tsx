@@ -15,6 +15,7 @@ import {
   RouterProvider,
   Route,
 } from "react-router-dom";
+import { TestePage } from './pages/TestePage';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path : "/login",
         element: <LoginPage />
+      },
+      {
+        path : "/teste",
+        element: <TestePage />
       },
       {
         path: "/cardapio",
