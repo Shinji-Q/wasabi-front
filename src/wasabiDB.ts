@@ -2,63 +2,143 @@ import { useEffect } from "react";
 import { api } from "./shared/services/api";
 
 export type categoria = {
-    categoria_id: number;
-    categoria_nome: String;
-    categoria_descricao: String;
+    categoriaId: number;
+    categoriaNome: String;
+    categoriaDescricao: String;
 }
 
 export type prato = { 
-    produto_id: number;
-    produto_nome : String;
-    produto_descricao: String;
-    produto_preco: number;
-    produto_categoria: number;
+    produtoId: number;
+    produtoNome : String;
+    produtoDescricao: String;
+    produtoPreco: number;
+    categoria: categoria;
 }
 
-const categorias = [
-       {"categoria_id": 0, "categoria_nome" : "cat0", "categoria_descricao": "cat00"},
-       {"categoria_id": 1, "categoria_nome" : "cat1", "categoria_descricao": "cat10"},
-       {"categoria_id": 2, "categoria_nome" : "cat2", "categoria_descricao": "cat20"},
-       {"categoria_id": 3, "categoria_nome" : "cat3", "categoria_descricao": "cat30"}
-];
+export type endereco = {
+    id: {
+      enderecoId: number,
+      enderecoCliente: number
+    },
+    enderecoRua: String,
+    enderecoBairro: String,
+    enderecoCidade: String,
+    enderecoEstado: String,
+    enderecoPais: String,
+    enderecoCep: String
+}
 
-const pratos = [
-    {"produto_id": 0, "produto_nome" : "Nome0", "produto_descricao": "Descricao0", "produto_preco": 0.00, "produto_categoria": 0},
-    {"produto_id": 1, "produto_nome" : "Nome1", "produto_descricao": "Descricao1", "produto_preco": 1.00, "produto_categoria": 0},
-    {"produto_id": 2, "produto_nome" : "Nome2", "produto_descricao": "Descricao2", "produto_preco": 2.00, "produto_categoria": 1},
-    {"produto_id": 3, "produto_nome" : "Nome3", "produto_descricao": "Descricao3", "produto_preco": 3.00, "produto_categoria": 1},
-    {"produto_id": 4, "produto_nome" : "Nome4", "produto_descricao": "Descricao4", "produto_preco": 4.00, "produto_categoria": 2},
-    {"produto_id": 5, "produto_nome" : "Nome5", "produto_descricao": "Descricao5", "produto_preco": 5.00, "produto_categoria": 2},
-    {"produto_id": 6, "produto_nome" : "Nome6", "produto_descricao": "Descricao6", "produto_preco": 6.00, "produto_categoria": 3},
-    {"produto_id": 7, "produto_nome" : "Nome7", "produto_descricao": "Descricao7", "produto_preco": 7.00, "produto_categoria": 3},
-];
+export type cartao = {
+    id: {
+      cartaoId: number,
+      cartaoCliente: number
+    },
+    cartaoNumero: String
+}
+
+export type cliente = {
+    clienteId: number,
+    clienteNome: String,
+    clienteSobrenome: String,
+    clienteCpf: String,
+    clienteTelefone: String,
+    cartaos: cartao[],
+    enderecos: endereco[]
+}
+
+export type vendaHasProduto = {
+    id: {
+      vendaId: number,
+      produtoId: number
+    },
+    produto: prato,
+    quantidade: number
+}
+
+export type venda = {
+    vendaId: number,
+    cliente: cliente,
+    vendaTotal: number,
+    vendaData: Date,
+    vendaHasProdutos: vendaHasProduto[]
+}
+
+export type usuario = {
+    usuarioId: number,
+    cliente: cliente,
+    usuarioEmail: String,
+    usuarioSenha: String,
+    usuarioTipo: String
+}
+  
 
 export async function getCategorias():Promise<categoria[]> {
-    const resp = await (await api.get("/categoria")).data
+    const resp = (await api.get<categoria[]>("/categoria")).data
     return resp;
 }
 
-export async function getCategoria(categoria_id:number):Promise<categoria[]> {
-    const resp = await (await api.get("/categoria"+categoria_id)).data
+export async function getCategoria(categoriaId:number):Promise<categoria> {
+    const resp = (await api.get<categoria>("/categoria/"+categoriaId)).data;
     return resp;
 }
 
 export async function getPratos():Promise<prato[]> {
-    const resp = await (await api.get("/produto")).data
+    const resp = (await api.get<prato[]>("/produto")).data
     return resp;
 }
 
-export async function getPrato(produto_id:number):Promise<prato> {
-    const resp = await (await api.get("/produto/"+produto_id)).data
+export async function getPrato(produtoId:number):Promise<prato> {
+    const resp = (await api.get<prato>("/produto/"+produtoId)).data
     return resp;
 }
 
-export async function getClientes():Promise<prato> {
-    const resp = await (await api.get("/cliente/")).data
+export async function getEnderecos():Promise<endereco[]> {
+    const resp = (await api.get<endereco[]>("/endereco/")).data
     return resp;
 }
 
-export async function getCliente(cliente_id:number):Promise<prato> {
-    const resp = await (await api.get("/cliente/"+cliente_id)).data
+export async function getEndereco(enderecoId:number):Promise<endereco> {
+    const resp = (await api.get<endereco>("/endereco/"+enderecoId)).data
+    return resp;
+}
+
+export async function getCartoes():Promise<cartao[]> {
+    const resp = (await api.get<cartao[]>("/cartao/")).data
+    return resp;
+}
+
+export async function getCartao(cartaoId:number, cartaoCliente:number):Promise<cartao> {
+    const resp = (await api.get<cartao>("/cartao/?cartaoId="+ cartaoId +"&cartaoCliente="+ cartaoCliente)).data
+    return resp;
+}
+
+export async function getClientes():Promise<cliente[]> {
+    const resp = (await api.get<cliente[]>("/cliente/")).data
+    return resp;
+}
+
+export async function getCliente(clienteId:number):Promise<cliente> {
+    const resp = (await api.get<cliente>("/cliente/"+clienteId)).data
+    return resp;
+}
+
+
+export async function getVendas():Promise<venda[]> {
+    const resp = (await api.get<venda[]>("/venda/")).data
+    return resp;
+}
+
+export async function getVenda(vendaId:number):Promise<venda> {
+    const resp = (await api.get<venda>("/venda/"+vendaId)).data
+    return resp;
+}
+
+export async function getUsuarios():Promise<usuario[]> {
+    const resp = (await api.get<usuario[]>("/usuario/")).data
+    return resp;
+}
+
+export async function getUsuario(usuarioId:number):Promise<usuario> {
+    const resp = (await api.get<usuario>("/usuario/"+usuarioId)).data
     return resp;
 }
