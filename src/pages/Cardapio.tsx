@@ -31,12 +31,12 @@ export function Cardapio(){
                                     index.toString();
                             return (
                                 <Link 
-                                to={cat.categoria_id.toString()} 
+                                to={cat.categoriaId.toString()} 
                                 className="categoria"
                                 //@ts-ignore
                                 key={index}
                                 id = {tipo}>
-                                    {cat.categoria_nome}</Link>
+                                    {cat.categoriaNome}</Link>
                             );
                         })
                         }

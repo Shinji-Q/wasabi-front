@@ -8,7 +8,6 @@ import { Cardapio, loader as cardapioLoader } from "./pages/Cardapio";
 import { Categoria, loader as categoriaLoader } from "./pages/Cardapio/Categoria";
 import { ErrorPage } from "./pages/ErrorPage";
 import wasabiLogo from "./assets/wasabi-logo.png"
-
 import "../style/main.css"
 import {
   createBrowserRouter,
@@ -17,6 +16,7 @@ import {
   Route,
 } from "react-router-dom";
 import { getPratos, prato } from "./wasabiDB";
+import { TestePage } from './pages/TestePage';
 
 const router = createBrowserRouter([
   {
@@ -36,6 +36,10 @@ const router = createBrowserRouter([
       {
         path : "/login",
         element: <LoginPage />
+      },
+      {
+        path : "/teste",
+        element: <TestePage />
       },
       {
         path: "/cardapio",
