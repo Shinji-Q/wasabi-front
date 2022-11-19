@@ -48,6 +48,7 @@ const router = createBrowserRouter([
         children: [{
           path: "/cardapio/:categoriaId",
           element: <Categoria />,
+          //@ts-ignore
           loader: categoriaLoader,
         }]
       },

@@ -1,9 +1,22 @@
-import {useLoaderData} from "react-router-dom";
-import { categoria, prato } from "../../wasabiDB";
+import {useLoaderData, useParams} from "react-router-dom";
+import { 
+    categoria,
+     getPratos,
+     prato ,
+     getPratosByCategoria
+    } from "../../wasabiDB";
 
 
-export async function loader() {
 
+var categoriaId:number;
+
+//@ts-ignore
+export async function loader( {param} ) {
+    console.log(param.categoriaId);
+
+    const pratos = getPratosByCategoria(param.categoriaID)
+    
+    return pratos;
 }
 
 type CatProps ={
@@ -11,10 +24,19 @@ type CatProps ={
     pratos?: prato[];
 }
 
-export function Categoria(props:CatProps) {
 
+
+export function Categoria(props:CatProps) {
+    const pratosCategoria:prato[] = (useLoaderData() as prato[]);
+    console.log("estive aqui");
     return (
-        <h1> {props.categoria?.categoriaNome ?? `Erro, categoria nula`} </h1>
+
+        <>
+            {
+                `testando`
+            }
+        </>
     )
+
 
 }
