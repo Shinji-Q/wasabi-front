@@ -14,6 +14,11 @@ export async function loader():Promise<categoria[]> {
 
 export function Cardapio(){
     const categorias:categoria[] = (useLoaderData() as categoria[]);
+    useEffect(() => {
+        api.get("produto/1").then(response => {
+            console.log(response);
+        })
+    },[]);
         return (
             <>
                 <div id="menuCategorias">
@@ -45,23 +50,6 @@ export function Cardapio(){
 
 }
 
-export function TestePage(){
-    getPratos().then(prato => {
-        console.log(prato.pop());
-    })
-
-    useEffect(() => {
-        api.get("produto/1").then(response => {
-            console.log(response);
-        })
-    },[]);
-    return (
-        <>
-        <p>aaaa</p>
-            
-        </>
-    )
-}
 
 type CatProps = {
     categoria?: categoria;

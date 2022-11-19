@@ -1,8 +1,12 @@
 import {useLoaderData} from "react-router-dom";
 import { categoria, prato } from "../../wasabiDB";
 
+type paramsCat = {
+    categoriaId: number;
+}
+export async function loader( params: paramsCat) {
 
-export async function loader() {
+    return getProdutosByCategoria(params.categoriaId)
 
 }
 
