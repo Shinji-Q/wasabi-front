@@ -14,11 +14,11 @@ export async function loader():Promise<categoria[]> {
 
 export function Cardapio(){
     const categorias:categoria[] = (useLoaderData() as categoria[]);
-    useEffect(() => {
-        api.get("produto/1").then(response => {
-            console.log(response);
-        })
-    },[]);
+    // useEffect(() => {
+    //     api.get("produto/1").then(response => {
+    //         console.log(response);
+    //     })
+    // },[]);
         return (
             <>
                 <div id="menuCategorias">
@@ -29,11 +29,11 @@ export function Cardapio(){
                                     index === 0 ? `primeiro` :
                                     index === (categorias.length - 1) ? `ultimo` :
                                     index.toString();
-                            console.log(tipo);
                             return (
                                 <Link 
                                 to={cat.categoria_id.toString()} 
                                 className="categoria"
+                                //@ts-ignore
                                 key={index}
                                 id = {tipo}>
                                     {cat.categoria_nome}</Link>

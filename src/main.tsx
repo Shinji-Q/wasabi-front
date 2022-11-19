@@ -5,16 +5,18 @@ import { Cart } from "./pages/Cart";
 import { LoginPage } from "./pages/LoginPage";
 import { Home } from "./pages/Home";
 import { Cardapio, loader as cardapioLoader } from "./pages/Cardapio";
-import { Categoria } from "./pages/Cardapio/Categoria";
+import { Categoria, loader as categoriaLoader } from "./pages/Cardapio/Categoria";
 import { ErrorPage } from "./pages/ErrorPage";
 import wasabiLogo from "./assets/wasabi-logo.png"
 
 import "../style/main.css"
 import {
   createBrowserRouter,
+  createHashRouter,
   RouterProvider,
   Route,
 } from "react-router-dom";
+import { getPratos, prato } from "./wasabiDB";
 
 const router = createBrowserRouter([
   {
@@ -42,13 +44,17 @@ const router = createBrowserRouter([
         children: [{
           path: "/cardapio/:categoriaId",
           element: <Categoria />,
-        }
-        ]
+          loader: categoriaLoader,
+        }]
       },
     ]
   },
-
 ])
+
+export const pratos:Promise<prato[]> = getPratos();
+
+pratos.then(
+)
 
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
