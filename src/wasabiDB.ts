@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { api } from "./shared/services/api";
 
 export type categoria = {
     categoria_id: number;
@@ -32,10 +34,31 @@ const pratos = [
 ];
 
 export async function getCategorias():Promise<categoria[]> {
-    return categorias;
+    const resp = await (await api.get("/categoria")).data
+    return resp;
 }
 
+export async function getCategoria(categoria_id:number):Promise<categoria[]> {
+    const resp = await (await api.get("/categoria"+categoria_id)).data
+    return resp;
+}
 
 export async function getPratos():Promise<prato[]> {
-    return pratos;
+    const resp = await (await api.get("/produto")).data
+    return resp;
+}
+
+export async function getPrato(produto_id:number):Promise<prato> {
+    const resp = await (await api.get("/produto/"+produto_id)).data
+    return resp;
+}
+
+export async function getClientes():Promise<prato> {
+    const resp = await (await api.get("/cliente/")).data
+    return resp;
+}
+
+export async function getCliente(cliente_id:number):Promise<prato> {
+    const resp = await (await api.get("/cliente/"+cliente_id)).data
+    return resp;
 }
