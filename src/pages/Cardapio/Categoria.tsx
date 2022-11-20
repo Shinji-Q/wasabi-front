@@ -1,5 +1,6 @@
 import {useLoaderData, useParams} from "react-router-dom";
-import { categoria, getPratos, getPratosByCat, prato } from "../../wasabiDB";
+import WasabiDBApi, { categoria, prato } from "../../wasabiDB";
+import { PratoCard } from "./PratoCard";
 
 
 
@@ -7,7 +8,7 @@ var catId:number = 0;
 
 //@ts-ignore
 export async function loader( {params} ) {
-    const pratos = getPratosByCat(params.categoriaId);
+    const pratos = WasabiDBApi.getPratosByCat(params.categoriaId);
     return pratos;
 }
 
@@ -25,7 +26,7 @@ export function Categoria(props:CatProps) {
     console.log(pratosCategoria);
     return (
         <div id="cats">
-            {pratosCategoria.map(p => {return <p>{p.produtoNome} {p.produtoDescricao}</p>})}
+            {pratosCategoria.map(( p, index )=> {return <PratoCard key={index}  prato={p}/>})}
 
         </div>
     )
