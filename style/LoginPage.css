@@ -7,6 +7,9 @@ input[type=text], input[type=password] {
   box-sizing: border-box;
 }
 
+#loginScreen {
+    position: relative;
+}
 
 #loginPanel {
     position: absolute;

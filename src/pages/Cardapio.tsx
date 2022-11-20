@@ -14,7 +14,7 @@ export async function loader():Promise<categoria[]> {
 export function Cardapio(){
     const categorias:categoria[] = (useLoaderData() as categoria[]);
         return (
-            <>
+            <div id ="Cardapio">
                 <div id="menuCategorias">
                     {
                     categorias.map((cat:categoria, index:Number) => {
@@ -35,10 +35,10 @@ export function Cardapio(){
                     })
                     }
                 </div>
-                <div>
+                <div id="listaPratos">
                     <Outlet />
                 </div>
-            </>
+            </div>
         );
 
 }

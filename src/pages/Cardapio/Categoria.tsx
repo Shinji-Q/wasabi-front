@@ -1,21 +1,13 @@
 import {useLoaderData, useParams} from "react-router-dom";
-import { 
-    categoria,
-     getPratos,
-     prato ,
-     getPratosByCategoria
-    } from "../../wasabiDB";
+import { categoria, getPratos, getPratosByCat, prato } from "../../wasabiDB";
 
 
 
-var categoriaId:number;
+var catId:number = 0;
 
 //@ts-ignore
-export async function loader( {param} ) {
-    console.log(param.categoriaId);
-
-    const pratos = getPratosByCategoria(param.categoriaID)
-    
+export async function loader( {params} ) {
+    const pratos = getPratosByCat(params.categoriaId);
     return pratos;
 }
 
@@ -27,16 +19,15 @@ type CatProps ={
 
 
 export function Categoria(props:CatProps) {
-    const pratosCategoria:prato[] = (useLoaderData() as prato[]);
-    console.log("estive aqui");
+
+    // é necessário chamar a função useLoaderData pra dar update na página
+    const pratosCategoria:prato[] = (useLoaderData() as prato[])
+    console.log(pratosCategoria);
     return (
+        <div id="cats">
+            {pratosCategoria.map(p => {return <p>{p.produtoNome} {p.produtoDescricao}</p>})}
 
-        <>
-            {
-                `testando`
-            }
-        </>
+        </div>
     )
-
 
 }

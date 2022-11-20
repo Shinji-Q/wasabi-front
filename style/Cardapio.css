@@ -1,12 +1,14 @@
 
 #menuCategorias {
+    position: relative;
     background-color:black;
     color: white;
     width:150px;
     border-radius: 15px;
-    height:500px;
 }
-
+#Cardapio {
+    position:relative;
+}
 .categoria {
     background-color: #eee;
     color: black;
@@ -27,4 +29,10 @@
 
 #ultimo{
     border-radius: 0 0 15px 15px;
+}
+
+#listaPratos {
+    position: absolute;
+    top : 0;
+    left: 160px;
 }

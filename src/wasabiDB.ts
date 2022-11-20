@@ -92,6 +92,11 @@ export async function getPrato(produtoId:number):Promise<prato> {
     return resp;
 }
 
+export async function getPratosByCat(categoriaId:number):Promise<prato[]> {
+    const resp = (await api.get<prato[]>(`produto/cat/${categoriaId}`)).data
+    return resp;
+}
+
 export async function getEnderecos():Promise<endereco[]> {
     const resp = (await api.get<endereco[]>("/endereco/")).data
     return resp;

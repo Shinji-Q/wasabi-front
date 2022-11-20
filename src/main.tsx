@@ -48,7 +48,6 @@ const router = createBrowserRouter([
         children: [{
           path: "/cardapio/:categoriaId",
           element: <Categoria />,
-          //@ts-ignore
           loader: categoriaLoader,
         }]
       },
@@ -56,10 +55,6 @@ const router = createBrowserRouter([
   },
 ])
 
-export const pratos:Promise<prato[]> = getPratos();
-
-pratos.then(
-)
 
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

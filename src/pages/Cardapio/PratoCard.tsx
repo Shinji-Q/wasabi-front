@@ -1,6 +1,7 @@
 //hold it
 
-export function Prato() {
+
+export function PratoCard() {
     return(
         <h1>eita bixo</h1>
     )
