@@ -1,8 +1,8 @@
 import { useLoaderData } from "react-router-dom";
-import {Cookies} from "../App"
+import {Cookies} from "../hooks/Cookies"
 import WasabiDBApi, { prato } from "../wasabiDB";
 import { ProdutoCarrinho } from "./Carrinho/ProdutoCarrinho"
-
+import {addToSacola, fecharPedido} from "../hooks/Pedido"
 
 // recebe todos os produtos
 export async function loader() {
@@ -19,13 +19,14 @@ export function Cart(){
     const produtos:prato[] = (useLoaderData() as prato[]).filter( p => {
         return Cookies.sacola.has(p.produtoId.toString());
     });
+    console.log(produtos);
 
     var total:number = 0.00;
 
     var auxQuantPrato:number;
 
     function addProd(produtoId:number){
-        Cookies.addToSacola(produtoId);
+        addToSacola(produtoId);
 
         console.log(Cookies.sacola.get(produtoId.toString()));
         return false;
@@ -33,7 +34,7 @@ export function Cart(){
 
     function finalizarPedido(){
         console.log('finishing')
-        Cookies.fecharPedido();
+        fecharPedido();
     }
     
     return (
@@ -43,9 +44,11 @@ export function Cart(){
         </div>
             {
             produtos.map(p => {
+                    var quantidade = Cookies.sacola.get(p.produtoId.toString())??0;
+                    total = quantidade*p.produtoPreco;
                     return (
                         <div key={p.produtoId} className="prodCart">
-                        <h1>{p.produtoNome}  {auxQuantPrato} {total}</h1>
+                        <h1>{p.produtoNome}  {quantidade} {total}</h1>
                         <div id="controles">
                             <form key={p.produtoId}>
                                 <button id="adicionar" onClick={() => addProd(p.produtoId)}>+</button>

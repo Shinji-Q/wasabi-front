@@ -158,10 +158,9 @@ export default class WasabiDBApi{
         return resp;
     }
 
-    static async postVenda(venda:venda) {
-        await api.post("/venda", venda);
-        console.log('tentei');
+    static async postVenda(venda:venda):Promise<venda> {
+        const resp = (await api.post("/venda", venda)).data;
+        return resp;
     }
-
     
 } 
