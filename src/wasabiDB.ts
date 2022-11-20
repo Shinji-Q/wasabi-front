@@ -30,6 +30,7 @@ export type endereco = {
     enderecoCep: String
 }
 
+
 export type cartao = {
     id: {
       cartaoId: number,
@@ -156,4 +157,11 @@ export default class WasabiDBApi{
         const resp = (await api.get<usuario>("/usuario/"+usuarioId)).data
         return resp;
     }
+
+    static async postVenda(venda:venda) {
+        await api.post("/venda", venda);
+        console.log('tentei');
+    }
+
+    
 } 

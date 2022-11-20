@@ -1,7 +1,7 @@
 //hold it
 
 import { prato } from "../../wasabiDB"
-import { addToSacola } from "../../main"
+import { Cookies } from "../../App"
 
 type PratoCardProps = {
     prato:prato;
@@ -12,7 +12,8 @@ export function PratoCard(props:PratoCardProps) {
     function tentando (e:Event) {
         e.preventDefault
         console.log("tentando bastant");
-        addToSacola(props.prato.produtoId);
+        Cookies.addToSacola(props.prato.produtoId);
+        console.log(Cookies.sacola)
     }
     return(
         <div className="pratoCard">
