@@ -15,6 +15,8 @@ export type prato = {
     categoria: categoria;
 }
 
+
+
 export type endereco = {
     id: {
       enderecoId: number,
@@ -70,80 +72,88 @@ export type usuario = {
     usuarioSenha: String,
     usuarioTipo: String
 }
-  
 
-export async function getCategorias():Promise<categoria[]> {
-    const resp = (await api.get<categoria[]>("/categoria")).data
-    return resp;
-}
+export default class WasabiDBApi{
+    constructor () {
 
-export async function getCategoria(categoriaId:number):Promise<categoria> {
-    const resp = (await api.get<categoria>("/categoria/"+categoriaId)).data;
-    return resp;
-}
+    }
+    static async getCategorias():Promise<categoria[]> {
+        const resp = (await api.get<categoria[]>("/categoria")).data
+        return resp;
+    }
 
-export async function getPratos():Promise<prato[]> {
-    const resp = (await api.get<prato[]>("/produto")).data
-    return resp;
-}
+    static async getCategoria(categoriaId:number):Promise<categoria> {
+        const resp = (await api.get<categoria>("/categoria/"+categoriaId)).data;
+        return resp;
+    }
 
-export async function getPrato(produtoId:number):Promise<prato> {
-    const resp = (await api.get<prato>("/produto/"+produtoId)).data
-    return resp;
-}
+    static async getPratos():Promise<prato[]> {
+        const resp = (await api.get<prato[]>("/produto")).data
+        return resp;
+    }
 
-export async function getPratosByCat(categoriaId:number):Promise<prato[]> {
-    const resp = (await api.get<prato[]>(`produto/cat/${categoriaId}`)).data
-    return resp;
-}
+    static async getPrato(produtoId:number):Promise<prato> {
+        const resp = (await api.get<prato>("/produto/"+produtoId)).data
+        return resp;
+    }
 
-export async function getEnderecos():Promise<endereco[]> {
-    const resp = (await api.get<endereco[]>("/endereco/")).data
-    return resp;
-}
+    static async getPratosByCat(categoriaId:number):Promise<prato[]> {
+        const resp = (await api.get<prato[]>(`produto/cat/${categoriaId}`)).data
+        return resp;
+    }
+    
+    tentando(){
 
-export async function getEndereco(enderecoId:number):Promise<endereco> {
-    const resp = (await api.get<endereco>("/endereco/"+enderecoId)).data
-    return resp;
-}
+    }
 
-export async function getCartoes():Promise<cartao[]> {
-    const resp = (await api.get<cartao[]>("/cartao/")).data
-    return resp;
-}
+    static async getEnderecos():Promise<endereco[]> {
+        const resp = (await api.get<endereco[]>("/endereco/")).data
+        return resp;
+    }
 
-export async function getCartao(cartaoId:number, cartaoCliente:number):Promise<cartao> {
-    const resp = (await api.get<cartao>("/cartao/?cartaoId="+ cartaoId +"&cartaoCliente="+ cartaoCliente)).data
-    return resp;
-}
+    static async getEndereco(enderecoId:number):Promise<endereco> {
+        const resp = (await api.get<endereco>("/endereco/"+enderecoId)).data
+        return resp;
+    }
 
-export async function getClientes():Promise<cliente[]> {
-    const resp = (await api.get<cliente[]>("/cliente/")).data
-    return resp;
-}
+    static async getCartoes():Promise<cartao[]> {
+        const resp = (await api.get<cartao[]>("/cartao/")).data
+        return resp;
+    }
 
-export async function getCliente(clienteId:number):Promise<cliente> {
-    const resp = (await api.get<cliente>("/cliente/"+clienteId)).data
-    return resp;
-}
+    static async getCartao(cartaoId:number, cartaoCliente:number):Promise<cartao> {
+        const resp = (await api.get<cartao>("/cartao/?cartaoId="+ cartaoId +"&cartaoCliente="+ cartaoCliente)).data
+        return resp;
+    }
+
+    static async getClientes():Promise<cliente[]> {
+        const resp = (await api.get<cliente[]>("/cliente/")).data
+        return resp;
+    }
+
+    static async getCliente(clienteId:number):Promise<cliente> {
+        const resp = (await api.get<cliente>("/cliente/"+clienteId)).data
+        return resp;
+    }
 
 
-export async function getVendas():Promise<venda[]> {
-    const resp = (await api.get<venda[]>("/venda/")).data
-    return resp;
-}
+    static async getVendas():Promise<venda[]> {
+        const resp = (await api.get<venda[]>("/venda/")).data
+        return resp;
+    }
 
-export async function getVenda(vendaId:number):Promise<venda> {
-    const resp = (await api.get<venda>("/venda/"+vendaId)).data
-    return resp;
-}
+    static async getVenda(vendaId:number):Promise<venda> {
+        const resp = (await api.get<venda>("/venda/"+vendaId)).data
+        return resp;
+    }
 
-export async function getUsuarios():Promise<usuario[]> {
-    const resp = (await api.get<usuario[]>("/usuario/")).data
-    return resp;
-}
+    static async getUsuarios():Promise<usuario[]> {
+        const resp = (await api.get<usuario[]>("/usuario/")).data
+        return resp;
+    }
 
-export async function getUsuario(usuarioId:number):Promise<usuario> {
-    const resp = (await api.get<usuario>("/usuario/"+usuarioId)).data
-    return resp;
-}
+    static async getUsuario(usuarioId:number):Promise<usuario> {
+        const resp = (await api.get<usuario>("/usuario/"+usuarioId)).data
+        return resp;
+    }
+} 
