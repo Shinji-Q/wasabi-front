@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { Link, Outlet, useLoaderData} from "react-router-dom";
-import { getCategorias, categoria, prato, getPratos} from "../wasabiDB";
+import WasabiDBApi ,{ categoria, prato} from "../wasabiDB";
 import { Categoria } from "./Cardapio/Categoria";
 import "../../style/Cardapio.css"
 import { api } from "../shared/services/api";
 
 
 export async function loader():Promise<categoria[]> {
-    const categorias = await getCategorias();
+    const categorias = await WasabiDBApi.getCategorias();
     return categorias;
 }
 

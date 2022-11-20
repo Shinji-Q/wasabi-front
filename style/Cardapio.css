@@ -1,20 +1,27 @@
 
-#menuCategorias {
-    position: relative;
-    background-color:black;
-    color: white;
-    width:150px;
-    border-radius: 15px;
-}
 #Cardapio {
+    background-color:black;
+    height:10px;
     position:relative;
 }
+
+#menuCategorias {
+    position: absolute;
+    left: 0;
+    background-color:black;
+    color: white;
+    width:20%;
+    border-radius: 15px;
+}
+
 .categoria {
     background-color: #eee;
+    
     color: black;
     display: block;
-    padding: 12px;
+    padding: 10px 0;
     text-decoration: none;
+    text-align: center;
 }
 
 .categoria:hover{
@@ -33,6 +40,9 @@
 
 #listaPratos {
     position: absolute;
-    top : 0;
-    left: 160px;
+    right: 0;
+    margin: 0;
+    width: 80%;
+    margin-right: 10px;
+    background-color:white;
 }
