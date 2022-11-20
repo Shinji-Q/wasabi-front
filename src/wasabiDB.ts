@@ -82,6 +82,16 @@ export async function getCategoria(categoriaId:number):Promise<categoria> {
     return resp;
 }
 
+export async function createCategoria(categoria:categoria):Promise<categoria> {
+    const resp = (await api.post<categoria>("/categoria/", categoria)).data;
+    return resp;
+}
+
+export async function updateCategoria(categoria:categoria):Promise<categoria> {
+    const resp = (await api.put<categoria>("/categoria/", categoria)).data;
+    return resp;
+}
+
 export async function getPratos():Promise<prato[]> {
     const resp = (await api.get<prato[]>("/produto")).data
     return resp;
@@ -89,6 +99,16 @@ export async function getPratos():Promise<prato[]> {
 
 export async function getPrato(produtoId:number):Promise<prato> {
     const resp = (await api.get<prato>("/produto/"+produtoId)).data
+    return resp;
+}
+
+export async function createPrato(prato:prato):Promise<prato> {
+    const resp = (await api.post<prato>("/produto/", prato)).data;
+    return resp;
+}
+
+export async function updatePrato(prato:prato):Promise<prato> {
+    const resp = (await api.put<prato>("/produto/", prato)).data;
     return resp;
 }
 
@@ -102,6 +122,16 @@ export async function getEndereco(enderecoId:number):Promise<endereco> {
     return resp;
 }
 
+export async function createEndereco(endereco:endereco):Promise<endereco> {
+    const resp = (await api.post<endereco>("/endereco/", endereco)).data;
+    return resp;
+}
+
+export async function updateEndereco(endereco:endereco):Promise<endereco> {
+    const resp = (await api.put<endereco>("/endereco/", endereco)).data;
+    return resp;
+}
+
 export async function getCartoes():Promise<cartao[]> {
     const resp = (await api.get<cartao[]>("/cartao/")).data
     return resp;
@@ -109,6 +139,16 @@ export async function getCartoes():Promise<cartao[]> {
 
 export async function getCartao(cartaoId:number, cartaoCliente:number):Promise<cartao> {
     const resp = (await api.get<cartao>("/cartao/?cartaoId="+ cartaoId +"&cartaoCliente="+ cartaoCliente)).data
+    return resp;
+}
+
+export async function createCartao(cartao:cartao):Promise<cartao> {
+    const resp = (await api.post<cartao>("/cartao/", cartao)).data;
+    return resp;
+}
+
+export async function updateCartao(cartao:cartao):Promise<cartao> {
+    const resp = (await api.put<cartao>("/cartao/", cartao)).data;
     return resp;
 }
 
@@ -122,6 +162,15 @@ export async function getCliente(clienteId:number):Promise<cliente> {
     return resp;
 }
 
+export async function createCliente(cliente:cliente):Promise<cliente> {
+    const resp = (await api.post<cliente>("/cliente/", cliente)).data;
+    return resp;
+}
+
+export async function updateCliente(cliente:cliente):Promise<cliente> {
+    const resp = (await api.put<cliente>("/cliente/", cliente)).data;
+    return resp;
+}
 
 export async function getVendas():Promise<venda[]> {
     const resp = (await api.get<venda[]>("/venda/")).data
@@ -133,6 +182,16 @@ export async function getVenda(vendaId:number):Promise<venda> {
     return resp;
 }
 
+export async function createVenda(venda:venda):Promise<venda> {
+    const resp = (await api.post<venda>("/venda/", venda)).data;
+    return resp;
+}
+
+export async function updateVenda(venda:venda):Promise<venda> {
+    const resp = (await api.put<venda>("/venda/", venda)).data;
+    return resp;
+}
+
 export async function getUsuarios():Promise<usuario[]> {
     const resp = (await api.get<usuario[]>("/usuario/")).data
     return resp;
@@ -140,5 +199,15 @@ export async function getUsuarios():Promise<usuario[]> {
 
 export async function getUsuario(usuarioId:number):Promise<usuario> {
     const resp = (await api.get<usuario>("/usuario/"+usuarioId)).data
+    return resp;
+}
+
+export async function createUsuario(usuario:usuario):Promise<usuario> {
+    const resp = (await api.post<usuario>("/usuario/", usuario)).data;
+    return resp;
+}
+
+export async function updateUsuario(usuario:usuario):Promise<usuario> {
+    const resp = (await api.put<usuario>("/usuario/", usuario)).data;
     return resp;
 }
