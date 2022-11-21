@@ -27,11 +27,13 @@ export function removeFromSacola(produtoId:number){
 
 export function setProdQuant(produtoId:number, quantidade: number){
 
-    if(quantidade > 0)
-    console.log('quantidade alterada')
-    Cookies.sacola.set(produtoId.toString(), quantidade);
-    Cookies.writeSacola();
-
+    if(quantidade > 0) {
+        console.log('quantidade alterada')
+        Cookies.sacola.set(produtoId.toString(), quantidade);
+        Cookies.writeSacola();
+    } else if (quantidade === 0) {
+        console.log("removendo");
+    }
 }
 
 //@ts-ignore

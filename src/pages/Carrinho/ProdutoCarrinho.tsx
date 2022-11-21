@@ -1,7 +1,7 @@
 import { prato } from "../../wasabiDB";
 import "../../../style/ProdutoCarrinho.css"
 import { Cookies } from "../../hooks/Cookies";
-import {addToSacola, setProdQuant, fecharPedido} from "../../hooks/Pedido";
+import {addToSacola, setProdQuant, fecharPedido, removeOneFromSacola} from "../../hooks/Pedido";
 import React from "react";
 
 type propsProdutoCarrinho = {
@@ -46,8 +46,8 @@ export class ProdutoCarrinho extends React.Component{
             <div id="controles">
                 <form key={this.prod.produtoId}>
                     <button id="removerTodos">lixinho</button>
-                    <button id="removerUm">-</button>
-                    <input type="number" onChange={(ev) => {this.updateQuantidade(ev, this.prod.produtoId)}} />
+                    <button id="removerUm" onClick={(ev) => {this.remOne(ev, this.prod.produtoId)}}>-</button>
+                    <input type="number"  onChange={(ev) => {this.updateQuantidade(ev, this.prod.produtoId)}} defaultValue={this.quantidade}/>
                     <button id="adicionar" onClick={(ev) => {this.addProd(ev, this.prod.produtoId)}}>+</button>
                 </form>
             </div>
@@ -58,6 +58,15 @@ export class ProdutoCarrinho extends React.Component{
     addProd(ev:React.MouseEvent<HTMLButtonElement,MouseEvent>, produtoId:number){
         ev.preventDefault();
         addToSacola(produtoId);
+
+        console.log(Cookies.sacola.get(produtoId.toString()));
+        this.update();
+        return false;
+    }
+
+    remOne(ev:React.MouseEvent<HTMLButtonElement,MouseEvent>, produtoId:number){
+        ev.preventDefault();
+        removeOneFromSacola(produtoId);
 
         console.log(Cookies.sacola.get(produtoId.toString()));
         this.update();
