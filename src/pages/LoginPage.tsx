@@ -3,6 +3,7 @@ import wasabiLogo from "../assets/wasabi-logo.png"
 import sushiBackground from "../assets/sushi_background.jpg"
 import { Cookies } from "../hooks/Cookies"
 
+
 export function LoginPage(){
     return (
         <div id="loginScreen">
@@ -18,7 +19,7 @@ export function LoginPage(){
                         <label> Senha: </label>
                         <input type="password" name="password" id="inPwd"/>
                         <button type="submit" >login</button>
-                        <a href={`newaccount`}>criar conta</a>
+                        <a href={`signup`}>criar conta</a>
                     </form>
 
                 </div>

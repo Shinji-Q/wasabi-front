@@ -17,6 +17,8 @@ import {
 } from "react-router-dom";
 import { prato } from "./wasabiDB";
 import { TestePage } from './pages/TestePage';
+import { FormularioClientePage } from "./pages/FormularioClientePage";
+
 
 
 const router = createBrowserRouter([
@@ -40,8 +42,8 @@ const router = createBrowserRouter([
         element: <LoginPage />
       },
       {
-        path : "/teste",
-        element: <TestePage />
+        path : "/signup",
+        element: <FormularioClientePage />
       },
       {
         path: "/cardapio",
