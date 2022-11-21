@@ -23,6 +23,16 @@ export class ProdutoCarrinho extends React.Component{
         console.log(props.prato);
     }
 
+    update() {
+        this.setState((state) => {
+
+        this.quantidade = Cookies.sacola.get(this.prod.produtoId.toString())??0;
+
+        return ({quantidade: this.quantidade,})
+            
+        })
+    }
+
     render () {
         const idProduto = this.prod.produtoId;
         const total = this.prod.produtoPreco * this.quantidade;
@@ -50,6 +60,7 @@ export class ProdutoCarrinho extends React.Component{
         addToSacola(produtoId);
 
         console.log(Cookies.sacola.get(produtoId.toString()));
+        this.update();
         return false;
     }
 
@@ -61,6 +72,7 @@ export class ProdutoCarrinho extends React.Component{
                 setProdQuant(produtoId, updatedAmount)
                 this.updateItem(produtoId);
                 console.log('que?')
+                this.update();
             }
         }
     }
