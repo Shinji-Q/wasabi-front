@@ -11,12 +11,13 @@ export function LoginPage(){
                 <img src={wasabiLogo} alt="wasabiLogo" id="logoLogin"/>
                 <div id="formContainer">
 
-                    <form id="loginForm">
+                    <form id="loginForm" action="http://localhost:8080/login" method="post">
                         <label> Email: </label>
-                        <input type="text" name="email" id="inEmail"/>
+                        <input type="text" name="username" id="inEmail"/>
 
                         <label> Senha: </label>
                         <input type="password" name="password" id="inPwd"/>
+                        <button type="submit" >login</button>
                         <a href={`newaccount`}>criar conta</a>
                     </form>
 
