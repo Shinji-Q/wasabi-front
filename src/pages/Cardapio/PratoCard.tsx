@@ -19,14 +19,16 @@ export function PratoCard(props:PratoCardProps) {
     return(
         <div className="pratoCard">
             <div id="descricao">
-                <h1 id="nome">
-                    {props.prato.produtoNome}
-                </h1>
-                <p>
-                    {props.prato.produtoDescricao}
-                </p>
+                <div className="descTextoCard">
+                    <p id="nomePrato">
+                        {props.prato.produtoNome}
+                    </p>
+                    <p>
+                        {props.prato.produtoDescricao}
+                    </p>
+                </div>
+                <img className="imagemPratoCard"src={`data:image/png;base64,${props.prato.produtoImagem??""}` }/>
                 {/* @ts-ignore */}
-                <img style={{height:"100px",}} src={`data:image/png;base64,${props.prato.produtoImagem??""}` }/>
             </div>
             {/*@ts-ignore  */}
             <div id="acoes" onClick={tentando}>

@@ -27,7 +27,7 @@ export function removeOneFromSacola(produtoId:number){
     
 }
 export function removeFromSacola(produtoId:number){
-    setProdQuant(produtoId, 0);
+    Cookies.sacola.delete(produtoId.toString());
 }
 
 export function setProdQuant(produtoId:number, quantidade: number){
@@ -76,6 +76,7 @@ export async function fecharPedido():Promise<venda>{
         //juntando informações de usuário e data
         const vendafechada:venda = {
             vendaId: -1,
+            //@ts-ignore
             cliente: Cookies.user,
             vendaTotal: total,
             //@ts-ignore

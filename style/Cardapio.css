@@ -1,27 +1,27 @@
 
 #Cardapio {
     background-color:black;
-    height:10px;
-    position:relative;
 }
 
 #menuCategorias {
-    position: absolute;
-    left: 0;
-    background-color:black;
     color: white;
-    width:20%;
+    height: 40px;
     border-radius: 15px;
 }
 
 .categoria {
-    background-color: #eee;
+    background-color: rgb(70, 69, 69);
     
-    color: black;
+    color: rgb(153, 156, 146);
     display: block;
-    padding: 10px 0;
-    text-decoration: none;
+    float:left;
+    width:75px;
+    height: 40px;
     text-align: center;
+}
+
+.categoria p {
+    padding: 0px;
 }
 
 .categoria:hover{
@@ -31,17 +31,79 @@
 }
 
 #primeiro{
-    border-radius: 15px 15px 0 0;
+    border-radius: 15px 0 0 0;
 }
 
 #ultimo{
-    border-radius: 0 0 15px 15px;
+    border-radius: 0 15px 0 0;
 }
 
 #listaPratos {
-    position: absolute;
-    right: 0;
-    margin: 0;
-    width: 80%;
     background-color:white;
 }
+
+.pratoCard {
+    border-top: 3pt solid black;
+    background-color: #dbdbdb;
+    position:relative;
+    display:block;
+    float: inline-start;
+    width:100%;
+}
+#card0 {
+    border-top: 0pt solid black;
+
+}
+
+#nomePrato {
+    margin: 0px;
+}
+
+#descricao {
+    left: 0;
+    top:0;
+    width:80%;
+}
+
+.descTextoCard {
+    margin: 10px;
+    float:left;
+    width: auto;
+}
+
+#NomePrato{
+    font: italic bold 14px 
+}
+.imagemPratoCard {
+    float:right;
+    width: 30%;
+}
+#acoes {
+    align-items:center;
+    position:absolute;
+    top:0;
+    right:0;
+    width:20%;
+    height: 100%;
+}
+
+#add {
+    background-color:rgb(70, 69, 69);
+    color: white;
+    margin-top: 50%;
+    height: 40px;
+    margin-left: 50%;
+    transform: translate(-50%, -100%);
+    width: 100px;
+    top:50%;
+    border: 0px;
+    border-radius: 10px;
+}
+
+#add:hover {
+    background-color:rgb(131, 130, 130);
+    color: rgb(97, 97, 97);
+
+}
+
+

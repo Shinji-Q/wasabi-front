@@ -20,6 +20,7 @@ export class App extends React.Component{
     console.log(Cookies.user);
 
     WasabiDBApi.getCliente(1).then( (user) => {
+
       localStorage.setItem("user", JSON.stringify(user))
       
     }
