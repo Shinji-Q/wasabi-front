@@ -50,7 +50,8 @@ export class ProdutoCarrinho extends React.Component{
                     <input 
                         name="inQuant"
                         type="number"  
-                        onChange={(ev) => {this.updateQuantidade(ev, this.prod.produtoId)}} 
+                        onChange={(ev) => {this.updateQuantidade(ev, this.prod.produtoId)}}
+                        defaultValue={1} value={this.quantidade}
                     />
                     <button id="adicionar" onClick={(ev) => {this.addProd(ev, this.prod.produtoId)}}>+</button>
                 </form>

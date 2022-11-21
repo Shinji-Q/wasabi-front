@@ -18,6 +18,7 @@ import {
 } from "react-router-dom";
 import { prato } from "./wasabiDB";
 import { TestePage } from './pages/TestePage';
+import { UserProfile} from "./pages/UserProfile";
 
 
 const router = createBrowserRouter([
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
         path:"/finalizar-pedido",
         element: <FinalizarPedido />,
 
+      },
+      {
+        path:"/user-profile",
+        element: <UserProfile />,
       }
     ]
   },

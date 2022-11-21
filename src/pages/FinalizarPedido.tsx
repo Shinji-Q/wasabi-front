@@ -1,11 +1,21 @@
 import { Cookies } from "../hooks/Cookies";
-import { addToSacola } from "../hooks/Pedido";
+import { addToSacola, fecharPedido } from "../hooks/Pedido";
 import { prato } from "../wasabiDB";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 
 export function FinalizarPedido() {
     var pratosSacola:prato[] = JSON.parse(localStorage.getItem('sacola_detalhada')??"{}");
+    var [showConfirm, revelarConfirm]= useState(false);
 
+    function finalizar(){
+        fecharPedido().then((venda) => {
+            revelarConfirm(true);
+            console.log('pedido Fechado!');
+            console.log(venda);
+        });
+    }
     var total = 0.0;
     return (
         <>
@@ -33,15 +43,24 @@ export function FinalizarPedido() {
                     </div>
 
                 </div>
+                
                 )
 
             })
         }
         <div id="info">
-            <p>{Cookies.user.enderecos[0].enderecoCep}</p>
+            <p>{Cookies.user?.enderecos[0].enderecoCidade ?? "sheesh"} {}</p>
         <p>{total.toLocaleString('pt-BR', {style:'currency',currency:'BRL'})}</p>
+            <button onClick={() => finalizar()}>Confirmar Pedido</button>
         </div>
-            <button>Confirmar Pedido</button>
+
+        {
+            showConfirm &&
+            <div id="pedido confirmado">
+                <h1>Seu pedido foi confirmado :)</h1>
+                <Link to="/">Voltar para o início</Link>
+            </div>
+        }
         </>
     )
 }

@@ -1,19 +1,9 @@
 import WasabiDBApi, {venda, cliente,prato,vendaHasProduto} from "../wasabiDB";
-
+import React, {useState} from "react"
 export class Cookies {
   static sacola:Map<String, number> = Cookies.loadSacola() ?? new Map<String, number>();
-  static user:cliente;
-  static logado:boolean;
+  static user:cliente|null = this.loadUser();
 
-  static initTeste(){
-    WasabiDBApi.getCliente(1).then((u) => {
-      Cookies.user = u;
-      console.log(u);
-      localStorage.setItem("user", JSON.stringify(Cookies.user));
-    }).catch(() => {
-      console.log("falha ao buscar usuário");
-    })
-  }
 
   
 
@@ -46,17 +36,14 @@ export class Cookies {
 
   }
 
-  static loadUser(){
+  static loadUser():cliente|null{
     const cookieUser = localStorage.getItem("user")??"";
     if(cookieUser === "" ) {
-      Cookies.logado = false;
-      console.log('usuário não autenticado')
+      return null;
     } else {
-      Cookies.user = JSON.parse(cookieUser) as cliente;
-      console.log('usuário autenticado')
-      Cookies.logado = true;
+      const user:cliente = JSON.parse(cookieUser) as cliente;
+      return user;
     }
-
   }
 
 }
