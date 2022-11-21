@@ -26,6 +26,12 @@ export function Cart(){
     var auxQuantPrato:number;
 
     
+    function finalizarPedido(){
+        console.log('finishing')
+        fecharPedido().then((venda) => {
+            console.log(venda);
+        });
+    }
     return (
         <>
         <div id="descricao">
@@ -35,8 +41,9 @@ export function Cart(){
             produtos.map(p => {
                     var quantidade = Cookies.sacola.get(p.produtoId.toString())??0;
                     total = quantidade*p.produtoPreco;
+                    //console.log(p);
                     return (
-                        <ProdutoCarrinho/>
+                        <ProdutoCarrinho prato={p}/>
                     )
             })
             }

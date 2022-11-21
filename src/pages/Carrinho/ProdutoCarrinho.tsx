@@ -3,9 +3,11 @@ import "../../../style/ProdutoCarrinho.css"
 import { Cookies } from "../../hooks/Cookies";
 import {addToSacola, setProdQuant, fecharPedido} from "../../hooks/Pedido";
 import React from "react";
+
 type propsProdutoCarrinho = {
     prato:prato;
 }
+
 export class ProdutoCarrinho extends React.Component{
     prod:prato;
     quantidade:number;
@@ -18,6 +20,7 @@ export class ProdutoCarrinho extends React.Component{
         this.state = {
             quantidade: this.quantidade,
         }
+        console.log(props.prato);
     }
 
     render () {
@@ -34,8 +37,8 @@ export class ProdutoCarrinho extends React.Component{
                 <form key={this.prod.produtoId}>
                     <button id="removerTodos">lixinho</button>
                     <button id="removerUm">-</button>
-                    <input type="number" onChange={(ev) => {updateQuantidade(ev, p.produtoId)}} />
-                    <button id="adicionar" onClick={(ev) => addProd(ev, p.produtoId)}>+</button>
+                    <input type="number" onChange={(ev) => {this.updateQuantidade(ev, this.prod.produtoId)}} />
+                    <button id="adicionar" onClick={(ev) => {this.addProd(ev, this.prod.produtoId)}}>+</button>
                 </form>
             </div>
         </>
@@ -62,12 +65,6 @@ export class ProdutoCarrinho extends React.Component{
         }
     }
 
-    finalizarPedido(){
-        console.log('finishing')
-        fecharPedido().then((venda) => {
-            console.log(venda);
-        });
-    }
 
     updateItem(produtoId:number){
         var desc:HTMLElement|null = window.document.getElementById(`total#${produtoId}`);

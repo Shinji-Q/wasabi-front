@@ -6,6 +6,7 @@ import "../../style/Cardapio.css"
 import { api } from "../shared/services/api";
 
 
+
 export async function loader():Promise<categoria[]> {
     const categorias = await WasabiDBApi.getCategorias();
     return categorias;
