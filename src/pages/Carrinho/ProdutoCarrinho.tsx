@@ -20,7 +20,7 @@ export class ProdutoCarrinho extends React.Component{
         this.state = {
             quantidade: this.quantidade,
         }
-        console.log(props.prato);
+        this.update = this.update.bind(this);
     }
 
     update() {
@@ -47,7 +47,11 @@ export class ProdutoCarrinho extends React.Component{
                 <form key={this.prod.produtoId}>
                     <button id="removerTodos">lixinho</button>
                     <button id="removerUm" onClick={(ev) => {this.remOne(ev, this.prod.produtoId)}}>-</button>
-                    <input type="number"  onChange={(ev) => {this.updateQuantidade(ev, this.prod.produtoId)}} defaultValue={this.state.quantidade}/>
+                    <input 
+                        name="inQuant"
+                        type="number"  
+                        onChange={(ev) => {this.updateQuantidade(ev, this.prod.produtoId)}} 
+                    />
                     <button id="adicionar" onClick={(ev) => {this.addProd(ev, this.prod.produtoId)}}>+</button>
                 </form>
             </div>
@@ -61,7 +65,7 @@ export class ProdutoCarrinho extends React.Component{
 
         console.log(Cookies.sacola.get(produtoId.toString()));
         this.update();
-        return false;
+        return true;
     }
 
     remOne(ev:React.MouseEvent<HTMLButtonElement,MouseEvent>, produtoId:number){

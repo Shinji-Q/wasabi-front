@@ -1,9 +1,10 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, redirect, useLoaderData } from "react-router-dom";
 import {Cookies} from "../hooks/Cookies"
 import WasabiDBApi, { prato } from "../wasabiDB";
 import { ProdutoCarrinho } from "./Carrinho/ProdutoCarrinho"
 import {addToSacola, removeOneFromSacola, setProdQuant, fecharPedido} from "../hooks/Pedido"
 import "../../style/ProdutoCarrinho.css"
+import { useContext } from "react";
 // recebe todos os produtos
 export async function loader() {
 
@@ -25,17 +26,13 @@ export function Cart(){
 
     var auxQuantPrato:number;
 
+    //salvando lista de produtos para não precisar usar outro get
+    localStorage.setItem('sacola_detalhada', JSON.stringify(produtos));
+
     
-    function finalizarPedido(){
-        console.log('finishing')
-        fecharPedido().then((venda) => {
-            console.log(venda);
-        });
-    }
     return (
         <>
         <div id="descricao">
-
         </div>
             {
             produtos.map(p => {
@@ -48,7 +45,9 @@ export function Cart(){
             })
             }
             <div id="finalizar">
-                <button id="finalizar" name="finalizarPedido"onClick={()=>finalizarPedido()}>finalizar pedido</button>
+                <Link to="/finalizar-pedido"
+                id="finalizar" 
+                >finalizar pedido</Link>
             </div>
         </>
     )

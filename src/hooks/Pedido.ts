@@ -1,3 +1,4 @@
+import { redirect } from "react-router-dom";
 import WasabiDBApi, { venda, vendaHasProduto } from "../wasabiDB";
 import { Cookies } from "./Cookies";
 
@@ -86,6 +87,9 @@ export async function fecharPedido():Promise<venda>{
         
 
         const vendaConcluida = WasabiDBApi.createVenda(vendafechada)
+        vendaConcluida.then((venda) => {
+            redirect("/user/pedidos"+venda.vendaId);
+        })
         Cookies.dropSacola();
         return vendaConcluida;
     }).catch(()=>{

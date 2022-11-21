@@ -7,6 +7,7 @@ import { Home } from "./pages/Home";
 import { Cardapio, loader as cardapioLoader } from "./pages/Cardapio";
 import { Categoria, loader as categoriaLoader } from "./pages/Cardapio/Categoria";
 import { ErrorPage } from "./pages/ErrorPage";
+import { FinalizarPedido } from "./pages/FinalizarPedido"
 import wasabiLogo from "./assets/wasabi-logo.png"
 import "../style/main.css"
 import {
@@ -53,6 +54,12 @@ const router = createBrowserRouter([
           loader: categoriaLoader,
         }]
       },
+      {
+        
+        path:"/finalizar-pedido",
+        element: <FinalizarPedido />,
+
+      }
     ]
   },
 ])
