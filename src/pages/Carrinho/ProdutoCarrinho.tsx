@@ -1,6 +1,6 @@
 import { prato } from "../../wasabiDB";
 import "../../../style/ProdutoCarrinho.css"
-import { Cookies } from "../../App";
+import { Cookies } from "../../hooks/Cookies";
 import React from "react";
 type propsProdutoCarrinho = {
     quantidade:number;

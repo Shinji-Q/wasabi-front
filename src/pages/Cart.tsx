@@ -2,8 +2,8 @@ import { useLoaderData } from "react-router-dom";
 import {Cookies} from "../hooks/Cookies"
 import WasabiDBApi, { prato } from "../wasabiDB";
 import { ProdutoCarrinho } from "./Carrinho/ProdutoCarrinho"
-import {addToSacola, fecharPedido} from "../hooks/Pedido"
-
+import {addToSacola, removeOneFromSacola, setProdQuant, fecharPedido} from "../hooks/Pedido"
+import "../../style/ProdutoCarrinho.css"
 // recebe todos os produtos
 export async function loader() {
 
@@ -25,17 +25,31 @@ export function Cart(){
 
     var auxQuantPrato:number;
 
-    function addProd(produtoId:number){
+    function addProd(ev:React.MouseEvent<HTMLButtonElement,MouseEvent>, produtoId:number){
+        ev.preventDefault();
         addToSacola(produtoId);
 
         console.log(Cookies.sacola.get(produtoId.toString()));
         return false;
     }
 
+    function updateQuantidade(ev:React.ChangeEvent<HTMLInputElement>, produtoId:number){
+        const updatedAmountStr = ev.target.value;
+        if(updatedAmountStr !== ""){
+            const updatedAmount:number = Number.parseInt(updatedAmountStr);
+            if(updatedAmount > 0){
+                setProdQuant(produtoId, updatedAmount)
+            }
+        }
+    }
+
     function finalizarPedido(){
         console.log('finishing')
-        fecharPedido();
+        fecharPedido().then((venda) => {
+            console.log(venda);
+        });
     }
+
     
     return (
         <>
@@ -48,20 +62,23 @@ export function Cart(){
                     total = quantidade*p.produtoPreco;
                     return (
                         <div key={p.produtoId} className="prodCart">
-                        <h1>{p.produtoNome}  {quantidade} {total}</h1>
-                        <div id="controles">
-                            <form key={p.produtoId}>
-                                <button id="adicionar" onClick={() => addProd(p.produtoId)}>+</button>
-                                <button id="removerUm">-</button>
-                                <button id="removerTodos">lixinho</button>
-                            </form>
-                        </div>
+                            <div className="descricaoPedido" id={`produto#${p.produtoId}`}>
+                                <h1>{p.produtoNome}  {total.toLocaleString('pt-BR', {style:'currency',currency:'BRL'})}</h1>
+                            </div>
+                            <div id="controles">
+                                <form key={p.produtoId}>
+                                    <button id="removerTodos">lixinho</button>
+                                    <button id="removerUm">-</button>
+                                    <input type="number" onChange={(ev) => {updateQuantidade(ev, p.produtoId)}} />
+                                    <button id="adicionar" onClick={(ev) => addProd(ev, p.produtoId)}>+</button>
+                                </form>
+                            </div>
                         </div>
                     )
             })
             }
             <div id="finalizar">
-                <button onClick={()=>finalizarPedido()}>finalizar pedido</button>
+                <button id="finalizar" name="finalizarPedido"onClick={()=>finalizarPedido()}>finalizar pedido</button>
             </div>
         </>
     )

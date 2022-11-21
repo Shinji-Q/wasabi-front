@@ -28,11 +28,14 @@ export function removeFromSacola(produtoId:number){
 export function setProdQuant(produtoId:number, quantidade: number){
 
     if(quantidade > 0)
+    console.log('quantidade alterada')
     Cookies.sacola.set(produtoId.toString(), quantidade);
+    Cookies.writeSacola();
 
 }
 
-export function fecharPedido(){
+//@ts-ignore
+export async function fecharPedido():Promise<venda>{
     var pedidos:vendaHasProduto[] = [];
     var index:number = 0;
 
@@ -76,19 +79,10 @@ export function fecharPedido(){
         console.log(vendafechada);
         
 
-        const vendaconcluida = WasabiDBApi.postVenda(vendafechada).then( () => {
-
-            console.log('tentando');
-
-        }
-        ).catch((e) => {
-
-            console.log('algo deu erado ein');
-            console.log(e);
-        }
-        )
-
-        return vendaconcluida;
+        const vendaConcluida = WasabiDBApi.createVenda(vendafechada)
+        Cookies.dropSacola();
+        return vendaConcluida;
+    }).catch(()=>{
     })
 
 }

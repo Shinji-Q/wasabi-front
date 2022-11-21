@@ -25,6 +25,8 @@ export function PratoCard(props:PratoCardProps) {
                 <p>
                     {props.prato.produtoDescricao}
                 </p>
+                {/* @ts-ignore */}
+                <img src={props.prato.produtoImagem??""} />
             </div>
             {/*@ts-ignore  */}
             <div id="acoes" onClick={tentando}>

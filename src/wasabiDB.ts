@@ -13,6 +13,7 @@ export type prato = {
     produtoDescricao: String;
     produtoPreco: number;
     categoria: categoria;
+    produtoImagem: String;
 }
 
 
@@ -80,7 +81,8 @@ export default class WasabiDBApi{
     }
     
     static async getPratosByCat(categoriaId:number):Promise<prato[]> {
-        const resp = (await api.get<prato[]>(`produto/cat/${categoriaId}`)).data
+        console.log('here')
+        const resp = (await api.get<prato[]>("/produto/cat/"+categoriaId)).data
         return resp;
     }
     
@@ -227,5 +229,5 @@ export default class WasabiDBApi{
         const resp = (await api.put<usuario>("/usuario/", usuario)).data;
         return resp;
     }
-    
+
 } 
