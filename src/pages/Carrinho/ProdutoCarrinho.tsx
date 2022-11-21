@@ -47,7 +47,7 @@ export class ProdutoCarrinho extends React.Component{
                 <form key={this.prod.produtoId}>
                     <button id="removerTodos">lixinho</button>
                     <button id="removerUm" onClick={(ev) => {this.remOne(ev, this.prod.produtoId)}}>-</button>
-                    <input type="number"  onChange={(ev) => {this.updateQuantidade(ev, this.prod.produtoId)}} defaultValue={this.quantidade}/>
+                    <input type="number"  onChange={(ev) => {this.updateQuantidade(ev, this.prod.produtoId)}} defaultValue={this.state.quantidade}/>
                     <button id="adicionar" onClick={(ev) => {this.addProd(ev, this.prod.produtoId)}}>+</button>
                 </form>
             </div>
@@ -79,16 +79,8 @@ export class ProdutoCarrinho extends React.Component{
             const updatedAmount:number = Number.parseInt(updatedAmountStr);
             if(updatedAmount > 0){
                 setProdQuant(produtoId, updatedAmount)
-                this.updateItem(produtoId);
-                console.log('que?')
                 this.update();
             }
         }
-    }
-
-
-    updateItem(produtoId:number){
-        var desc:HTMLElement|null = window.document.getElementById(`total#${produtoId}`);
-        console.log(desc);
     }
 }

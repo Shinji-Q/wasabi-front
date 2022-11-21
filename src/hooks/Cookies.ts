@@ -21,8 +21,13 @@ export class Cookies {
     var cookieSacola = localStorage.getItem("sacola") ?? "";
 
     if(cookieSacola !== "") {
+      console.log("carregando sacola");
       var objSacola:Object = (JSON.parse(cookieSacola));
+      console.log('objSacola')
+      console.log(objSacola)
       var arraySacola:[String, number][] = Object.entries(objSacola);
+      console.log('arraySacola')
+      console.log(arraySacola)
       var sacola:Map<String,number> = new Map(arraySacola);
       console.log(sacola);
       return sacola;
@@ -31,7 +36,7 @@ export class Cookies {
   }
 
   static writeSacola(){
-    localStorage.setItem("sacola", JSON.stringify(this.sacola));
+    localStorage.setItem("sacola", JSON.stringify(Object.fromEntries(this.sacola)));
   }
 
   static dropSacola(){

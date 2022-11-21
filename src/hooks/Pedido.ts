@@ -9,6 +9,8 @@ export function addToSacola(produtoId:number)/*:React.MouseEventHandler<HTMLBREl
 
     //salvando a sacola localmente com cookies
     localStorage.setItem('sacola', JSON.stringify(Object.fromEntries(Cookies.sacola)))
+
+    Cookies.writeSacola();
 }
 
 
@@ -19,6 +21,8 @@ export function removeOneFromSacola(produtoId:number){
     setProdQuant(produtoId, quantidade);
     //salvando a sacola localmente com cookies
     localStorage.setItem('sacola', JSON.stringify(Object.fromEntries(Cookies.sacola)))
+
+    Cookies.writeSacola();
     
 }
 export function removeFromSacola(produtoId:number){
