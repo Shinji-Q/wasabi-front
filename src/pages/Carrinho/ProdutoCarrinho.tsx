@@ -52,6 +52,7 @@ export class ProdutoCarrinho extends React.Component{
             <div className="flex flex-col justify-between ml-4 flex-grow" id={`produto#${this.prod.produtoId}`}>
               <span className="font-bold text-sm">{this.prod.produtoNome}</span>
               <span className="text-red-500 text-xs">{this.prod.produtoDescricao}</span>
+              {/*@ts-ignore */}
               <button className="font-semibold hover:text-red-500 text-gray-500 text-xs" onClick={(ev) => {removeFromSacola(this.prod.produtoId); window.location.reload(false)}}>Remove</button>
             </div>
           </div>
