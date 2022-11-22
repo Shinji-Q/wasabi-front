@@ -2,13 +2,13 @@ import { useEffect } from "react";
 import { api } from "./shared/services/api";
 
 export type categoria = {
-    categoriaId: number;
+    categoriaId: number | null;
     categoriaNome: String;
     categoriaDescricao: String;
 }
 
 export type prato = { 
-    produtoId: number;
+    produtoId: number | null;
     produtoNome : String;
     produtoDescricao: String;
     produtoPreco: number;
@@ -20,9 +20,9 @@ export type prato = {
 
 export type endereco = {
     id: {
-      enderecoId: number,
-      enderecoCliente: number
-    },
+      enderecoId: number | null,
+      enderecoCliente: number | null
+    } | null,
     enderecoRua: String,
     enderecoBairro: String,
     enderecoCidade: String,
@@ -34,20 +34,20 @@ export type endereco = {
 
 export type cartao = {
     id: {
-      cartaoId: number,
-      cartaoCliente: number
-    },
+      cartaoId: number | null,
+      cartaoCliente: number | null
+    } | null,
     cartaoNumero: String
 }
 
 export type cliente = {
-    clienteId: number,
+    clienteId: number | null,
     clienteNome: String,
     clienteSobrenome: String,
     clienteCpf: String,
     clienteTelefone: String,
-    cartaos: cartao[],
-    enderecos: endereco[]
+    cartaos: cartao[] | null,
+    enderecos: endereco[] | null
 }
 
 export type vendaHasProduto = {
@@ -68,7 +68,7 @@ export type venda = {
 }
 
 export type usuario = {
-    usuarioId: number,
+    usuarioId: number | null,
     cliente: cliente,
     usuarioEmail: String,
     usuarioSenha: String,
