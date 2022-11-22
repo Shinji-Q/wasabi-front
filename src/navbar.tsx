@@ -5,6 +5,8 @@ import wasabiLogo from "./assets/wasabi-logo.png";
 import { Cookies } from './hooks/Cookies';
 import { Badge } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import "../style/tailwind.css"
+import { App } from './App';
 
 
 const navigation = [
@@ -87,13 +89,13 @@ export default function Navbar() {
                   <div>
                     <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Open user menu</span>
-                      {!Cookies.logado && (
+                      {!(Cookies.user == null) && (
                           <Link to="/login">
                             <UserIcon className="h-6 w-6 rounded-full" color="white" aria-hidden="true"/>
                           </Link>
                           
                         )}
-                      {Cookies.logado && (
+                      {(Cookies.user == null)  && (
                         <img
                           className="h-8 w-8 rounded-full"
                           src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
@@ -104,7 +106,7 @@ export default function Navbar() {
                     </Menu.Button>
                   </div>
 
-                  {Cookies.logado && (
+                  {(Cookies.user == null)  && (
                     
                     <Transition
                       as={Fragment}
