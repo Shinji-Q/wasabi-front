@@ -50,3 +50,18 @@ input[type=text], input[type=password] {
     margin: 15px;
 }
 
+#bntlogin, 
+#bntCriarConta{
+    background-color:rgb(16, 53, 172);
+    width: 150px;
+    height: 30px;
+    color:white;
+    border-radius:4px;
+    float:right;
+    align-items: center;
+    padding:auto;
+    margin: 5px;
+}
+
+
+

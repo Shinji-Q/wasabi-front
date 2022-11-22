@@ -11,19 +11,17 @@ export function LoginPage(){
         const email:string = (document.getElementById("inEmail") as HTMLInputElement).value;
         const passwd:string = (document.getElementById("inPwd") as HTMLInputElement).value;
         console.log(email + " " + passwd);
-        const usr = WasabiDBApi.getUsuarioByEmail(email);
+
+        const usr = WasabiDBApi.getUsuarioAutenticado(email,passwd);
         
         usr.then((u)=>{
-            if (u.usuarioSenha === passwd) {
-                console.log(u.cliente)
-                localStorage.setItem("user", JSON.stringify(u.cliente));
-                window.location.assign("/");
-            } else {
-                window.alert("usuario ou senha invalidos");
-            }
+
+
+            localStorage.setItem("user", JSON.stringify(u.cliente));
+            window.location.assign("/cardapio/1")
         }
         ).catch((e) =>{
-            console.log('erro!');
+            window.alert("usuário ou senha incorretos");
 
         });
 
@@ -46,8 +44,8 @@ export function LoginPage(){
 
                         <label> Senha: </label>
                         <input type="password" name="password" id="inPwd"/>
-                        <button type="submit" id="login">login</button>
-                        <a href={`signup`}>criar conta</a>
+                        <button type="submit" id="bntlogin">login</button>
+                        <button onClick={(ev) => window.location.assign("/signup")} id="bntCriarConta">criar conta</button>
                     </form>
 
                 </div>

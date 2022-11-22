@@ -9,7 +9,7 @@ export function UserProfile() {
     function logout() {
         localStorage.removeItem("user");
         
-        <Navigate to="/" />
+        window.location.assign("/cardapio/1");
     }
 
     return (

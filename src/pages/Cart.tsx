@@ -1,10 +1,11 @@
 import { Link, redirect, useLoaderData } from "react-router-dom";
 import {Cookies} from "../hooks/Cookies"
-import WasabiDBApi, { prato } from "../wasabiDB";
+import WasabiDBApi, { cartao, prato } from "../wasabiDB";
 import { ProdutoCarrinho } from "./Carrinho/ProdutoCarrinho"
 import {addToSacola, removeOneFromSacola, setProdQuant, fecharPedido} from "../hooks/Pedido"
 import "../../style/ProdutoCarrinho.css"
 import { useContext, useState } from "react";
+import Select  from "react-select";
 
 // recebe todos os produtos
 
@@ -56,9 +57,11 @@ export function Cart(){
     var auxQuantPrato:number;
 
     const formasEntrega = [
-        { nome: 'Entrega Normal', preco: 10},
-        { nome: 'Entrega Express', preco:  200},
-      ]
+        { label: 'Entrega Normal - R$10,00', value: 10},
+        { label: 'Entrega Express - R$ 50,00', value:  50},
+    ]
+
+    const [valorEntrega, setValorEntrega] = useState(0);
      
     function finalizarPedido(){
         console.log('finishing');
@@ -70,7 +73,9 @@ export function Cart(){
     //salvando lista de produtos para não precisar usar outro get
     localStorage.setItem('sacola_detalhada', JSON.stringify(produtosCarrinho));
     produtosCarrinho
-
+    if (Cookies.user === null) {
+        window.location.assign("/login");
+    }
     
     return (
         <>
@@ -117,14 +122,28 @@ export function Cart(){
                             <span className="font-semibold text-sm">{total.toLocaleString('pt-BR', {style:'currency',currency:'BRL'})}</span>
                         </div>
                         <div>
-                            <label className="font-medium inline-block mb-3 text-sm uppercase">Entrega</label>
+                            <label className="font-medium inline-block my-3 mb-3 text-sm uppercase">Forma de Pagamento</label>
                             <select className="block p-2 text-gray-600 w-full text-sm">
+                                <option value="">Dinheiro (na entrega)</option>
                                 {
-                                formasEntrega.map(entrega => {
-                                    return <option value="">{entrega.nome} - R$ {entrega.preco}</option>
-                                })
+                                    //@ts-ignore
+                                    Cookies.user.cartaos.map( (c:cartao) => {
+
+                                        console.log('cataos alfredo')
+                                        console.log(Cookies.user?.cartaos);
+
+                                        return (<option value="">{`cartão terminado em ${(c.cartaoNumero.substring(c.cartaoNumero.length-4))}`}</option>)
+                                    })
                                 }
+
                             </select>
+                        </div>
+
+                        <div>
+                           
+                            <label className="font-medium inline-block my-3 mb-3 text-sm uppercase">Entrega</label>
+                            <Select options={formasEntrega} onChange={(par) => {setValorEntrega(par?.value ?? 0)}} className="block p-2 text-gray-600 w-full text-sm">
+                            </Select>
                         </div>
                         <div className="py-10">
                             <label htmlFor="promo" className="font-semibold inline-block mb-3 text-sm uppercase">Promo Code</label>
@@ -134,7 +153,7 @@ export function Cart(){
                         <div className="border-t mt-8">
                             <div className="flex font-semibold justify-between py-6 text-sm uppercase">
                                 <span>Total</span>
-                                <span>{total.toLocaleString('pt-BR', {style:'currency',currency:'BRL'})}</span>
+                                <span>{(total + valorEntrega ).toLocaleString('pt-BR', {style:'currency',currency:'BRL'})}</span>
                             </div>
                             {
                             (produtosCarrinho.length !== 0) &&

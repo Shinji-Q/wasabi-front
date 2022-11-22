@@ -15,6 +15,10 @@ export async function loader():Promise<categoria[]> {
 export function Cardapio(){
     const categorias:categoria[] = (useLoaderData() as categoria[]);
         return (
+            <div id="pPrincipal">
+            <div id="boasVindas">
+                <h1>Wasabi - Sushi e Temakeria</h1>
+            </div>
             <div id ="Cardapio">
                 <div id="menuCategorias">
                     {
@@ -39,6 +43,7 @@ export function Cardapio(){
                 <div id="listaPratos">
                     <Outlet />
                 </div>
+            </div>
             </div>
         );
 

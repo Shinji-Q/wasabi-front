@@ -1,14 +1,33 @@
-#Cardapio {
-}
-
-#menuCategorias {
-    color: white;
-    height: 40px;
+#pPrincipal {
+    /* background-color: rgb(1, 26, 8); */
+    color:white;
     border-radius: 15px;
 }
 
+#pPrincipal h1 {
+}
+
+#boasVindas {
+    padding: 15px;
+}
+#boasVindas h1 {
+    font: bold 20pt verdana;
+}
+
+#Cardapio {
+    color: black;
+}
+#menuCategorias {
+    background-color:rgb(235, 62, 43);
+    padding-top: 2px;
+    padding-left: 2px;
+    color: white;
+    height: 40px;
+    border-radius: 17px 17px 0 0 ;
+}
+
 .categoria {
-    background-color: rgb(70, 69, 69);
+    background-color: rgb(7, 24, 16);
     
     color: rgb(153, 156, 146);
     display: block;

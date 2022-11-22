@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon, ShoppingCartIcon, UserIcon} from '@heroicons/react/24/outline'
+import { Bars3Icon, BellIcon, XMarkIcon, ShoppingCartIcon, UserIcon, QueueListIcon as CardapioIcon} from '@heroicons/react/24/outline'
 import wasabiLogo from "./assets/wasabi-logo.png";
 import { Cookies } from './hooks/Cookies';
 import { Badge } from '@material-ui/core';
@@ -9,9 +9,6 @@ import "../style/tailwind.css"
 import { App } from './App';
 
 
-const navigation = [
-  { name: 'Cardápio', href: '/cardapio/1', current: (window.location.pathname.indexOf('cardapio')!== -1) },
-]
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
@@ -21,11 +18,11 @@ export default function Navbar() {
 
   var autenticado = true;
   return (
-    <Disclosure as="nav" className="bg-zinc-800">
+    <Disclosure as="nav" className="bg-slate-200">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <div className="relative flex h-16 items-center justify-between">
+            <div className="relative flex h-20 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
@@ -39,38 +36,35 @@ export default function Navbar() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
+                  <Link to='/cardapio/1'>
                   <img
-                    className="block h-8 w-auto lg:hidden"
+                    className="block h-10 w-auto lg:hidden"
+                    src={wasabiLogo}
+                    alt="Wasabi!"
+                  />
+                  <img
+                    className="hidden h-10 w-auto lg:block"
                     src={wasabiLogo}
                     alt="Your Company"
                   />
-                  <img
-                    className="hidden h-8 w-auto lg:block"
-                    src={wasabiLogo}
-                    alt="Your Company"
-                  />
+                  </Link>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'px-3 py-2 rounded-md text-sm font-medium'
-                        )}
-                        aria-current={item.current ? 'page' : undefined}
-                      >
-                        {item.name}
-                      </a>
-                    ))}
                   </div>
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 
-              <a
+                <a
+                  href="/cardapio/1"
+                  type="button"
+                  className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                >
+                  <span className="sr-only">View notifications</span>
+                  <CardapioIcon className="h-6 w-6" aria-hidden="true" />
+                </a>
+                <a
                   href="/cart"
                   type="button"
                   className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -88,17 +82,14 @@ export default function Navbar() {
                     <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Open user menu</span>
                       {(Cookies.user == null) && (
-                          <Link to="/login">
-                            <UserIcon className="h-6 w-6 rounded-full" color="white" aria-hidden="true"/>
+                          <Link to="/login" id="botaoLogin">
+                            Login
                           </Link>
                           
                         )}
                       {!(Cookies.user == null)  && (
-                        <img
-                          className="h-8 w-8 rounded-full"
-                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                          alt=""
-                        />
+
+                            <UserIcon className="h-6 w-6 rounded-full" color="white" aria-hidden="true"/>
                         
                         )}
                     </Menu.Button>
@@ -121,10 +112,10 @@ export default function Navbar() {
                         <Menu.Item>
                           {({ active }) => (
                             <a
-                              href="#"
+                              href="/user-profile"
                               className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                             >
-                              Seu perfil
+                              Perfil
                             </a>
                           )}
                         </Menu.Item>
@@ -133,17 +124,7 @@ export default function Navbar() {
                             <a
                               href="#"
                               className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                            >
-                              Configurações
-                            </a>
-                          )}
-                        </Menu.Item>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <a
-                              href="#"
-                              className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                              onClick={Cookies.dropUser}
+                              onClick={() => {Cookies.dropUser(); window.location.assign("/")}}
                             >
                               Sair
                             </a>
@@ -161,20 +142,6 @@ export default function Navbar() {
 
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
-              {navigation.map((item) => (
-                <Disclosure.Button
-                  key={item.name}
-                  as="a"
-                  href={item.href}
-                  className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'block px-3 py-2 rounded-md text-base font-medium'
-                  )}
-                  aria-current={item.current ? 'page' : undefined}
-                >
-                  {item.name}
-                </Disclosure.Button>
-              ))}
             </div>
           </Disclosure.Panel>
         </>

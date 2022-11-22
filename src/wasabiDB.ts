@@ -179,6 +179,7 @@ export default class WasabiDBApi{
         const resp = (await api.get<cliente>("/cliente/"+clienteId)).data
         return resp;
     }
+
     
     static async createCliente(cliente:cliente):Promise<cliente> {
         const resp = (await api.post<cliente>("/cliente/", cliente)).data;
@@ -219,6 +220,11 @@ export default class WasabiDBApi{
         const resp = (await api.get<usuario>("/usuario/"+usuarioId)).data
         return resp;
     }
+
+    static async getUsuarioByEmail(email:string):Promise<usuario> {
+        const resp = (await api.get<usuario>("/usuario/email/"+email)).data
+        return resp;
+    }
       
     static async createUsuario(usuario:any):Promise<usuario> {
         const resp = (await api.post<usuario>("/usuario/", usuario)).data;
@@ -227,6 +233,13 @@ export default class WasabiDBApi{
 
     static async updateUsuario(usuario:usuario):Promise<usuario> {
         const resp = (await api.put<usuario>("/usuario/", usuario)).data;
+        return resp;
+    }
+
+    static async getUsuarioAutenticado(email:string, pwd:string):Promise<usuario> {
+        const request = `usuario/?usuarioEmail=${email}&usuarioSenha=${pwd}`;
+        console.log(request);
+        const resp = (await api.get<usuario>(request)).data
         return resp;
     }
 
