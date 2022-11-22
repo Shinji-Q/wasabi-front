@@ -5,6 +5,7 @@ import wasabiLogo from "../assets/wasabi-logo.png";
 
 import "../../style/tailwind.css"
 import WasabiDBApi, { cliente, endereco, usuario } from '../wasabiDB';
+import { redirect } from 'react-router-dom';
 //import "../../js/input_phone.js"
 
 export function FormularioClientePage(){
@@ -25,7 +26,7 @@ export function FormularioClientePage(){
         clienteSobrenome: "",
         clienteId: null,
         cartaos: null,
-        enderecos: [ endereco ]
+        enderecos: endereco
     })
 
     const [usuario, setUsuario] = useState<usuario>({
@@ -40,11 +41,13 @@ export function FormularioClientePage(){
         e.preventDefault()
         clientevar.enderecos = [endereco];
         usuario.cliente = clientevar;
-        console.log(usuario)
+		const request = JSON.stringify(usuario, (key, value) => {
+			if (value !== null) return value
+		  })
 
-        WasabiDBApi.createUsuario(usuario).then((response) => {
+        WasabiDBApi.createUsuario(JSON.parse(request)).then((response) => {
           setUsuario(response)
-          console.log(response)
+          window.location.href = "/login"
         })
         .catch(function (error) {
           console.log(error);

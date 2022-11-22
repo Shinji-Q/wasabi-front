@@ -46,8 +46,8 @@ export type cliente = {
     clienteSobrenome: String,
     clienteCpf: String,
     clienteTelefone: String,
-    cartaos: cartao[] | null,
-    enderecos: endereco[] | null
+    cartaos: cartao | cartao[] | null,
+    enderecos: endereco | endereco[] | null
 }
 
 export type vendaHasProduto = {
@@ -219,12 +219,12 @@ export default class WasabiDBApi{
         const resp = (await api.get<usuario>("/usuario/"+usuarioId)).data
         return resp;
     }
-    
-    static async createUsuario(usuario:usuario):Promise<usuario> {
+      
+    static async createUsuario(usuario:any):Promise<usuario> {
         const resp = (await api.post<usuario>("/usuario/", usuario)).data;
         return resp;
     }
-    
+
     static async updateUsuario(usuario:usuario):Promise<usuario> {
         const resp = (await api.put<usuario>("/usuario/", usuario)).data;
         return resp;
