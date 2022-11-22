@@ -1,5 +1,13 @@
 
 body {
-    background-color : #5f5f5f;
+    background-image: linear-gradient(
+          rgba(0, 0, 0, 0.7), 
+          rgba(0, 0, 0, 0.7)
+        ),url(../src/assets/main_background.jpg);
+    background-size:200%;
+    background-attachment: fixed;
+    background-repeat:no-repeat;
+    width:100%;
+
     font: normal 14px arial;
 }

@@ -1,5 +1,4 @@
 #Cardapio {
-    background-color:black;
 }
 
 #menuCategorias {
@@ -20,7 +19,7 @@
 }
 
 .categoria p {
-    padding: 0px;
+    padding-top: 10px;
 }
 
 .categoria:hover{

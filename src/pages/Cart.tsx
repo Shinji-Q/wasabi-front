@@ -78,7 +78,7 @@ export function Cart(){
                         </a>
                     </div>
 
-                    <div id="summary" className="w-1/4 px-8 py-10">
+                    <div id="summary" className="w-1/4 px-8 py-10 bg-red-600">
                         <h1 className="font-semibold text-2xl border-b pb-8">Descrição dos Pedidos</h1>
                         <div className="flex justify-between mt-10 mb-5">
                             <span className="font-semibold text-sm uppercase">Items {produtos.length}</span>
@@ -111,26 +111,6 @@ export function Cart(){
                     </div>
 
                 </div>
-            </div>
-        <div id="descricao">
-            
-            
-        </div>
-            {
-            produtos.map(p => {
-                    var quantidade = Cookies.sacola.get(p.produtoId.toString())??0;
-                    total = quantidade*p.produtoPreco;
-                    //console.log(p);
-                    return (
-                        //@ts-ignore
-                        <ProdutoCarrinho prato={p}/>
-                    )
-            })
-            }
-            <div id="finalizar">
-                <Link to="/finalizar-pedido"
-                id="finalizar" 
-                >finalizar pedido</Link>
             </div>
         </>
     )

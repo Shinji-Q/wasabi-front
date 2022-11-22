@@ -25,7 +25,7 @@ export function Cardapio(){
                         return (
                             <Link 
                                 to={cat.categoriaId.toString()} 
-                                className="categoria"
+                                className={`categoria`}
                                 //@ts-ignore
                                 key={index}
                                 id = {tipo}
@@ -43,7 +43,6 @@ export function Cardapio(){
         );
 
 }
-
 
 type CatProps = {
     categoria?: categoria;

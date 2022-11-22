@@ -12,7 +12,6 @@ export function Home(){
 
     <section id="HomePage" > 
         <h1>Bem Vindo!</h1>
-        {/* mostrar informações de usuário */}
 
     </section>
 

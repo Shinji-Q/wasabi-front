@@ -11,7 +11,7 @@ import { App } from './App';
 
 const navigation = [
   { name: 'Início', href: '/', current: (window.location.pathname == '/') },
-  { name: 'Cardápio', href: '/cardapio', current: (window.location.pathname == '/cardapio') },
+  { name: 'Cardápio', href: '/cardapio/1', current: (window.location.pathname.indexOf('cardapio')!== -1) },
   { name: 'Carrinho', href: '/cart', current: (window.location.pathname == '/cart') },
   { name: 'Perfil', href: '/login', current: (window.location.pathname == '/login') },
 ]
@@ -24,7 +24,7 @@ export default function Navbar() {
 
   var autenticado = true;
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="bg-zinc-800">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

@@ -6,7 +6,7 @@ import { Link, Outlet } from "react-router-dom";
 import WasabiDBApi, { cliente, usuario, venda, vendaHasProduto } from "./wasabiDB";
 import { Cookies } from "./hooks/Cookies"
 import Navbar from "./navbar";
-
+import mainBack from "./assets/main_background.jpg"
 
 export class App extends React.Component{
   constructor(props:object){
@@ -32,7 +32,7 @@ export class App extends React.Component{
       <>
       <Navbar />
       <div>
-        <div id="content">
+        <div id="content" >
           <Outlet />
         </div>
         {/* static top pannel */}

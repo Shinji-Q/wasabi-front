@@ -22,7 +22,6 @@ import { FormularioClientePage } from "./pages/FormularioClientePage";
 
 import { UserProfile} from "./pages/UserProfile";
 
-
 const router = createBrowserRouter([
   {
     path : "/",
