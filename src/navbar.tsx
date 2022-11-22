@@ -10,10 +10,7 @@ import { App } from './App';
 
 
 const navigation = [
-  { name: 'Início', href: '/', current: (window.location.pathname == '/') },
   { name: 'Cardápio', href: '/cardapio/1', current: (window.location.pathname.indexOf('cardapio')!== -1) },
-  { name: 'Carrinho', href: '/cart', current: (window.location.pathname == '/cart') },
-  { name: 'Perfil', href: '/login', current: (window.location.pathname == '/login') },
 ]
 
 function classNames(...classes: string[]) {

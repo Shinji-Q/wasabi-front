@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Outlet, useLoaderData} from "react-router-dom";
 import WasabiDBApi ,{ categoria, prato} from "../wasabiDB";
 import { Categoria } from "./Cardapio/Categoria";
@@ -23,15 +23,15 @@ export function Cardapio(){
                             : index === (categorias.length - 1) ? `ultimo` 
                             : index.toString();
                         return (
-                            <Link 
-                                to={cat.categoriaId.toString()} 
+                            <a
+                                href={cat.categoriaId.toString()} 
                                 className={`categoria`}
                                 //@ts-ignore
                                 key={index}
                                 id = {tipo}
                             >
                                 <p className="nomeCat">{cat.categoriaNome}</p>
-                            </Link>
+                            </a>
                         );
                     })
                     }
