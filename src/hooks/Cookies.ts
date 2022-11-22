@@ -33,7 +33,6 @@ export class Cookies {
     console.log("SACOLA DELETADA")
     this.sacola = new Map();
     localStorage.setItem("sacola", "{}");
-
   }
 
   static loadUser():cliente|null{

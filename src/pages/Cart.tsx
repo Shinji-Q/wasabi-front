@@ -5,7 +5,9 @@ import { ProdutoCarrinho } from "./Carrinho/ProdutoCarrinho"
 import {addToSacola, removeOneFromSacola, setProdQuant, fecharPedido} from "../hooks/Pedido"
 import "../../style/ProdutoCarrinho.css"
 import { useContext, useState } from "react";
+
 // recebe todos os produtos
+
 export async function loader() {
 
     const produtos = await WasabiDBApi.getPratos();
@@ -15,13 +17,7 @@ export async function loader() {
 
 
 
-export function updateTotal() {
 
-}
-
-export function updateProdutosCarrinho(){
-
-}
 
 export function Cart(){
 
@@ -36,8 +32,9 @@ export function Cart(){
         acc += quantidade*p.produtoPreco;
     })
 
-
+    const [prodCart, setProdCart] = useState(produtosCarrinho);
     const [total, setTotal] = useState(acc);
+
     function updateTotal(){
         var acc:number = 0;
 
@@ -98,13 +95,14 @@ export function Cart(){
                                 // setTotal(total+quantidade*p.produtoPreco);
                                 //console.log(p);
                                 return (
+                                    //@ts-ignore
                                     <ProdutoCarrinho prato={p} updateHook={updateTotal}/>
                                 )
                         })
                         }
 
 
-                        <a href="/cardapio" className="flex font-semibold text-indigo-600 text-sm mt-10">
+                        <a href="/cardapio/1" className="flex font-semibold text-indigo-600 text-sm mt-10">
 
                             <svg className="fill-current mr-2 text-indigo-600 w-4" viewBox="0 0 448 512"><path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z" /></svg>
                             Continue Comprando

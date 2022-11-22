@@ -56,6 +56,7 @@ export async function fecharPedido():Promise<venda>{
     o valor e insere a data para fazer uma requisição e adicionar o pedido
     ao banco de dados
     */
+   console.log('here')
     WasabiDBApi.getPratos()
     .then((pratos)=>{
 
@@ -65,16 +66,16 @@ export async function fecharPedido():Promise<venda>{
         var total:number = 0;
         var pedidos:vendaHasProduto[]= pratos.map((prato, index )=>{
 
-        var quantidade = Cookies.sacola.get(prato.produtoId.toString())?? 0;
-        total += prato.produtoPreco*quantidade;
-        const vendaAux:vendaHasProduto =
-            {
-            id:{vendaId: -1,
-            produtoId:prato.produtoId},
-            produto:prato,
-            quantidade:quantidade,
-            }
-        return(vendaAux);
+            var quantidade = Cookies.sacola.get(prato.produtoId.toString())?? 0;
+            total += prato.produtoPreco*quantidade;
+            const vendaAux:vendaHasProduto =
+                {
+                id:{vendaId: -1,
+                produtoId:prato.produtoId},
+                produto:prato,
+                quantidade:quantidade,
+                }
+            return(vendaAux);
         })
 
         //juntando informações de usuário e data
@@ -92,12 +93,11 @@ export async function fecharPedido():Promise<venda>{
         
 
         const vendaConcluida = WasabiDBApi.createVenda(vendafechada)
-        vendaConcluida.then((venda) => {
-            redirect("/user/pedidos"+venda.vendaId);
-        })
         Cookies.dropSacola();
+
         return vendaConcluida;
     }).catch(()=>{
+        console.log('erro db')
     })
 
 }
