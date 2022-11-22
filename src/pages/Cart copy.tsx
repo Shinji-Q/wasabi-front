@@ -4,6 +4,7 @@ import WasabiDBApi, { prato } from "../wasabiDB";
 import { ProdutoCarrinho } from "./Carrinho/ProdutoCarrinho"
 import {addToSacola, removeOneFromSacola, setProdQuant, fecharPedido} from "../hooks/Pedido"
 import "../../style/ProdutoCarrinho.css"
+import { useState } from "react";
 // recebe todos os produtos
 export async function loader() {
 
@@ -15,13 +16,10 @@ export async function loader() {
 
 export function Cart(){
 
-    //filtra apenas os produtos que estão na sacola
-    const produtos:prato[] = (useLoaderData() as prato[]).filter( p => {
-        return Cookies.sacola.has(p.produtoId.toString());
-    });
-    console.log(produtos);
+    // filtra apenas os produtos que estão na sacola
 
-    var total:number = 0.00;
+
+
 
     var auxQuantPrato:number;
 
@@ -56,7 +54,6 @@ export function Cart(){
                         {
                         produtos.map(p => {
                                 var quantidade = Cookies.sacola.get(p.produtoId.toString())??0;
-                                total += quantidade*p.produtoPreco;
                                 //console.log(p);
                                 return (
                                     //@ts-ignore

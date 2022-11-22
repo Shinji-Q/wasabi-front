@@ -4,7 +4,7 @@ import WasabiDBApi, { prato } from "../wasabiDB";
 import { ProdutoCarrinho } from "./Carrinho/ProdutoCarrinho"
 import {addToSacola, removeOneFromSacola, setProdQuant, fecharPedido} from "../hooks/Pedido"
 import "../../style/ProdutoCarrinho.css"
-import { useContext } from "react";
+import { useContext, useState } from "react";
 // recebe todos os produtos
 export async function loader() {
 
@@ -14,15 +14,47 @@ export async function loader() {
 }
 
 
+
+export function updateTotal() {
+
+}
+
+export function updateProdutosCarrinho(){
+
+}
+
 export function Cart(){
 
-    //filtra apenas os produtos que estão na sacola
-    const produtos:prato[] = (useLoaderData() as prato[]).filter( p => {
+    var produtosCarrinho =  (useLoaderData() as prato[]).filter( p => {
         return Cookies.sacola.has(p.produtoId.toString());
     });
-    console.log(produtos);
+    var acc:number = 0;
 
-    var total:number = 0.00;
+    produtosCarrinho.forEach((p) =>
+    {
+        const quantidade = Cookies.sacola.get(p.produtoId.toString())??0;
+        acc += quantidade*p.produtoPreco;
+    })
+
+
+    const [total, setTotal] = useState(acc);
+    function updateTotal(){
+        var acc:number = 0;
+
+        produtosCarrinho.forEach((p) =>
+        {
+            const quantidade = Cookies.sacola.get(p.produtoId.toString())??0;
+            acc += quantidade*p.produtoPreco;
+        })
+        setTotal(acc);
+        console.log('updated');
+    }
+
+    console.log("produtosCarrinho");
+    console.log(produtosCarrinho);
+
+    //filtra apenas os produtos que estão na sacola
+
 
     var auxQuantPrato:number;
 
@@ -38,7 +70,8 @@ export function Cart(){
         });
     }
     //salvando lista de produtos para não precisar usar outro get
-    localStorage.setItem('sacola_detalhada', JSON.stringify(produtos));
+    localStorage.setItem('sacola_detalhada', JSON.stringify(produtosCarrinho));
+    produtosCarrinho
 
     
     return (
@@ -48,7 +81,7 @@ export function Cart(){
                     <div className="w-3/4 bg-white px-10 py-10">
                         <div className="flex justify-between border-b pb-8">
                             <h1 className="font-semibold text-2xl">Carrinho</h1>
-                            <h2 className="font-semibold text-2xl">{produtos.length} Items</h2>
+                            <h2 className="font-semibold text-2xl">{produtosCarrinho?.length} Items</h2>
                         </div>
                         <div className="flex mt-10 mb-5">
                             <h3 className="font-semibold text-gray-600 text-xs uppercase w-2/5">Detalhes dos Produtos</h3>
@@ -59,13 +92,13 @@ export function Cart(){
 
 
                         {
-                        produtos.map(p => {
+                        produtosCarrinho?.map(p => {
+
                                 var quantidade = Cookies.sacola.get(p.produtoId.toString())??0;
-                                total += quantidade*p.produtoPreco;
+                                // setTotal(total+quantidade*p.produtoPreco);
                                 //console.log(p);
                                 return (
-                                    //@ts-ignore
-                                    <ProdutoCarrinho prato={p}/>
+                                    <ProdutoCarrinho prato={p} updateHook={updateTotal}/>
                                 )
                         })
                         }
@@ -81,7 +114,7 @@ export function Cart(){
                     <div id="summary" className="w-1/4 px-8 py-10 bg-red-600">
                         <h1 className="font-semibold text-2xl border-b pb-8">Descrição dos Pedidos</h1>
                         <div className="flex justify-between mt-10 mb-5">
-                            <span className="font-semibold text-sm uppercase">Items {produtos.length}</span>
+                            <span className="font-semibold text-sm uppercase">Items {produtosCarrinho?.length}</span>
                             <span className="font-semibold text-sm">{total.toLocaleString('pt-BR', {style:'currency',currency:'BRL'})}</span>
                         </div>
                         <div>

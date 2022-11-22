@@ -44,7 +44,7 @@ export class App extends React.Component{
 
   static update() {
     //@ts-ignore
-    window.location.reload(false);
+    //window.location.reload(false);
   }
 
   // sacola:Map<ProdutoId, quantidade>

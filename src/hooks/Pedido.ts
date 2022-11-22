@@ -29,6 +29,7 @@ export function removeOneFromSacola(produtoId:number){
 }
 export function removeFromSacola(produtoId:number){
     Cookies.sacola.delete(produtoId.toString());
+    Cookies.writeSacola();
     App.update();
 }
 

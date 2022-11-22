@@ -8,10 +8,12 @@ import {removeFromSacola} from "../../hooks/Pedido"
 
 type propsProdutoCarrinho = {
     prato:prato;
+    updateHook:()=>void;
 }
 
 export class ProdutoCarrinho extends React.Component{
     prod:prato;
+    updateHook:()=>void;
     quantidade:number;
 
     constructor(props:propsProdutoCarrinho){
@@ -22,6 +24,7 @@ export class ProdutoCarrinho extends React.Component{
         this.state = {
             quantidade: this.quantidade,
         }
+        this.updateHook = props.updateHook;
         this.update = this.update.bind(this);
     }
 
@@ -49,19 +52,19 @@ export class ProdutoCarrinho extends React.Component{
             <div className="flex flex-col justify-between ml-4 flex-grow" id={`produto#${this.prod.produtoId}`}>
               <span className="font-bold text-sm">{this.prod.produtoNome}</span>
               <span className="text-red-500 text-xs">{this.prod.produtoDescricao}</span>
-              <button className="font-semibold hover:text-red-500 text-gray-500 text-xs" onClick={(ev) => {removeFromSacola(this.prod.produtoId)}}>Remove</button>
+              <button className="font-semibold hover:text-red-500 text-gray-500 text-xs" onClick={(ev) => {removeFromSacola(this.prod.produtoId); this.updateHook()}}>Remove</button>
             </div>
           </div>
           <div className="flex justify-center w-1/5">
           <form key={this.prod.produtoId}>
 
-            <button id="removerUm" onClick={(ev) => {this.remOne(ev, this.prod.produtoId)}}>
+            <button id="removerUm" onClick={(ev) => {this.remOne(ev, this.prod.produtoId);this.updateHook()}}>
                 <svg className="fill-current text-gray-600 w-3" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/></svg>
             </button>
             
-            <input className="mx-2 border text-center w-8" type="number"  onChange={(ev) => {this.updateQuantidade(ev, this.prod.produtoId)}} defaultValue={1} value={this.quantidade}/>
+            <input className="mx-2 border text-center w-8" type="number"  onChange={(ev) => {this.updateQuantidade(ev, this.prod.produtoId);this.updateHook()}} defaultValue={1} value={this.quantidade}/>
 
-            <button id="adicionar" onClick={(ev) => {this.addProd(ev, this.prod.produtoId)}}>
+            <button id="adicionar" onClick={(ev) => {this.addProd(ev, this.prod.produtoId);this.updateHook()}}>
                 
             <svg className="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
               <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/></svg>
