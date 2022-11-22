@@ -5,6 +5,8 @@ import { Cookies } from "../../hooks/Cookies"
 import {addToSacola, removeFromSacola, removeOneFromSacola, setProdQuant} from "../../hooks/Pedido"
 import React, { useState } from "react";
 
+
+
 type PratoCardProps = {
     prato:prato;
 }
@@ -31,10 +33,8 @@ export function PratoCard(props:PratoCardProps) {
         } else {
             setInCart(true);
             setQuantidade(quant);
-            console.log('updatgin quantidade');
-            console.log(quant);
-            console.log(quantidade);
         }
+        updateAll();
     }
 
     function removerDoCarrinho () {

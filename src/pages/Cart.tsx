@@ -6,6 +6,7 @@ import {addToSacola, removeOneFromSacola, setProdQuant, fecharPedido} from "../h
 import "../../style/ProdutoCarrinho.css"
 import { useContext, useState } from "react";
 import Select  from "react-select";
+import { App } from "../App";
 
 // recebe todos os produtos
 
@@ -20,12 +21,17 @@ export async function loader() {
 
 
 
+export type option = {
+    label: String;
+    value: any;
+}
 export function Cart(){
 
     var produtosCarrinho =  (useLoaderData() as prato[]).filter( p => {
         return Cookies.sacola.has(p.produtoId.toString());
     });
     var acc:number = 0;
+    const [valorEntrega, putValorEntrega] = useState(0);
 
     produtosCarrinho.forEach((p) =>
     {
@@ -56,12 +62,16 @@ export function Cart(){
 
     var auxQuantPrato:number;
 
-    const formasEntrega = [
+    const formasEntrega:option[] = [
         { label: 'Entrega Normal - R$10,00', value: 10},
         { label: 'Entrega Express - R$ 50,00', value:  50},
     ]
 
-    const [valorEntrega, setValorEntrega] = useState(0);
+
+    var selectedCartao = -1;
+    let formasDePagamento = [
+        {label: 'Dinheiro (na entrega)', value:-1}
+    ]
      
     function finalizarPedido(){
         console.log('finishing');
@@ -75,6 +85,14 @@ export function Cart(){
     produtosCarrinho
     if (Cookies.user === null) {
         window.location.assign("/login");
+    }
+
+    function setValorEntrega(entrega:option){
+        putValorEntrega(entrega.value as number);
+
+        Cookies.setTipoEntrega(entrega);
+        console.log('tipoDeentregacookie')
+        console.log(Cookies.tipoDeEntrega);
     }
     
     return (
@@ -123,11 +141,12 @@ export function Cart(){
                         </div>
                         <div>
                             <label className="font-medium inline-block my-3 mb-3 text-sm uppercase">Forma de Pagamento</label>
-                            <select className="block p-2 text-gray-600 w-full text-sm">
-                                <option value="">Dinheiro (na entrega)</option>
                                 {
                                     //@ts-ignore
-                                    Cookies.user.cartaos.map( (c:cartao) => {
+                                    Cookies.user.cartaos.forEach( (c:cartao, index:number) => {
+                                        console.log('cartaofredo');
+                                        console.log(c);
+                                        formasDePagamento = [...formasDePagamento, {label: `Cartão terminado em ${c.cartaoNumero.substring(c.cartaoNumero.length-4)}`, value: index}]
 
                                         console.log('cataos alfredo')
                                         console.log(Cookies.user?.cartaos);
@@ -135,15 +154,14 @@ export function Cart(){
                                         return (<option value="">{`cartão terminado em ${(c.cartaoNumero.substring(c.cartaoNumero.length-4))}`}</option>)
                                     })
                                 }
+                            <Select options={formasDePagamento} onChange={(par) => {selectedCartao = par?.value??-1; console.log(selectedCartao);console.log("selectedCartao^^")}}className="block p-2 text-gray-600 w-full text-sm"/>
 
-                            </select>
                         </div>
 
                         <div>
                            
                             <label className="font-medium inline-block my-3 mb-3 text-sm uppercase">Entrega</label>
-                            <Select options={formasEntrega} onChange={(par) => {setValorEntrega(par?.value ?? 0)}} className="block p-2 text-gray-600 w-full text-sm">
-                            </Select>
+                            <Select options={formasEntrega} onChange={(par) => {setValorEntrega(par)}} className="block p-2 text-gray-600 w-full text-sm"/>
                         </div>
                         <div className="py-10">
                             <label htmlFor="promo" className="font-semibold inline-block mb-3 text-sm uppercase">Promo Code</label>

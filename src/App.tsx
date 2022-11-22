@@ -9,14 +9,24 @@ import Navbar from "./navbar";
 import mainBack from "./assets/main_background.jpg"
 
 export class App extends React.Component{
+  static valorEntrega:number;
   constructor(props:object){
     super(props);
     this.state = {
       logado: Cookies.user !== null,
     };
+    App.valorEntrega = 0;
   }
   autenticado:boolean = true;
+
+
+  static updateValorEntrega(novoValor:number){
+    this.valorEntrega = novoValor;
+  }
+
+
   render() {
+
 
     console.log('logado?');
     console.log(Cookies.user);

@@ -21,6 +21,7 @@ import { TestePage } from './pages/TestePage';
 import { FormularioClientePage } from "./pages/FormularioClientePage";
 
 import { UserProfile} from "./pages/UserProfile";
+import { SystemUpdateAltOutlined } from "@material-ui/icons";
 
 const router = createBrowserRouter([
   {
@@ -71,8 +72,11 @@ const router = createBrowserRouter([
 ])
 
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+
+root.render(
   <React.StrictMode>
     <RouterProvider router={router}/>
   </React.StrictMode>
 )
+

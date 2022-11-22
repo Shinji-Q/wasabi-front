@@ -3,11 +3,26 @@ import { addToSacola, fecharPedido } from "../hooks/Pedido";
 import { cliente, endereco, prato } from "../wasabiDB";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import "../../style/FinalizarPedido.css"
+import "../../style/FinalizarPedido.css";
+import { App } from "../App";
 
 export function FinalizarPedido() {
     var pratosSacola:prato[] = JSON.parse(localStorage.getItem('sacola_detalhada')??"{}");
     var [showConfirm, revelarConfirm]= useState(false);
+    const tipoDeEntrega = Cookies.loadTipoEntrega();
+    const valorEntrega = tipoDeEntrega?.value??0;
+
+
+
+
+
+    if (Cookies.sacola.size === 0) {
+        window.alert("seu carrinho está vazio!");
+        window.location.assign("/cart");
+    }
+
+    console.log(tipoDeEntrega)
+
 
     function finalizar(){
         fecharPedido().then((venda) => {
@@ -19,12 +34,12 @@ export function FinalizarPedido() {
     function escreverEndereco(endereco:endereco):String{
         return(`${endereco.enderecoEstado} - ${endereco.enderecoCidade} - ${endereco.enderecoBairro}, ${endereco.enderecoRua}`);
     }
-    var total = 0.0;
+
+    var total:number = 0.0;
+    console.log('tipoDeEntrega>')
+    console.log(tipoDeEntrega);
     const user = Cookies.user as cliente;
-    if (Cookies.sacola.size ===0) {
-        window.alert("seu carrinho está vazio!");
-        window.location.assign("/cart")
-    }
+
 
     return (
         <div id="nota">
@@ -73,7 +88,15 @@ export function FinalizarPedido() {
 
             </div>
             <div id="footer">
-            <p>Total: {total.toLocaleString('pt-BR', {style:'currency',currency:'BRL'})}</p>
+
+                <div id="valores">
+
+                    <p>Produtos: {total.toLocaleString('pt-BR', {style:'currency',currency:'BRL'})}</p>
+                    <p>Entrea: {valorEntrega.toLocaleString('pt-BR', {style:'currency',currency:'BRL'})}</p>
+                    <p>Total: {(total + valorEntrega).toLocaleString('pt-BR', {style:'currency',currency:'BRL'})}</p>
+
+                </div>
+            
                 <button id="confirmar" onClick={() => finalizar()}>Confirmar Pedido</button>
             </div>
 

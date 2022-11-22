@@ -1,9 +1,33 @@
 import WasabiDBApi, {venda, cliente,prato,vendaHasProduto} from "../wasabiDB";
 import React, {useState} from "react"
+import { option } from "../pages/Cart";
 export class Cookies {
   static sacola:Map<String, number> = Cookies.loadSacola() ?? new Map<String, number>();
   static user:cliente|null = this.loadUser();
 
+  static tipoDeEntrega:option;
+
+  static setTipoEntrega(novoTipo:option) {
+
+    localStorage.setItem("tipoDeEntrega", JSON.stringify(novoTipo));
+    console.log("cookie entrega setado")
+
+  }
+
+  static loadTipoEntrega():option | null{
+    
+    const cookieTipoEntrega = localStorage.getItem("tipoDeEntrega");
+
+    if (cookieTipoEntrega !== null){
+      return JSON.parse(localStorage.getItem("tipoDeEntrega")??"{}");
+    }
+    return null;
+
+  }
+
+  static dropTipoEntrega() {
+    localStorage.removeItem("tipoDeEntrega");
+  }
 
   
 

@@ -36,6 +36,7 @@ button#confirmar {
     text-align: center;
     padding: 5px;
     border-radius:15px;
+    margin:10px;
 
 }
 div#pedido_confirmado {
@@ -81,4 +82,9 @@ div#dimm {
     background-color:#00000088;
     height:100%;
     width: 100%;
+}
+div#valores {
+    padding: 10px;
+    float:left;
+
 }
