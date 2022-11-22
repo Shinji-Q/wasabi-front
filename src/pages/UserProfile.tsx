@@ -1,6 +1,7 @@
 import { redirect, Navigate, Link } from "react-router-dom";
 import { Cookies } from "../hooks/Cookies"
 
+import "../../style/UserProfile.css"
 
 export function UserProfile() {
 
@@ -16,7 +17,11 @@ export function UserProfile() {
         <>
             {/* mostrar informações do usuário */}
 
-            <Link to="/" onClick={()=>logout()}>logout</Link>
+            <div id="holder">
+                <Link to="/" onClick={()=>logout()}>logout</Link>
+
+            </div>
+
         
         </>
     )
