@@ -61,10 +61,11 @@ export function Cart(){
       ]
      
     function finalizarPedido(){
-        console.log('finishing')
-        fecharPedido().then((venda) => {
-            console.log(venda);
-        });
+        console.log('finishing');
+        window.location.assign("/finalizar-pedido");
+        // fecharPedido().then((venda) => {
+        //     console.log(venda);
+        // });
     }
     //salvando lista de produtos para não precisar usar outro get
     localStorage.setItem('sacola_detalhada', JSON.stringify(produtosCarrinho));
@@ -135,9 +136,12 @@ export function Cart(){
                                 <span>Total</span>
                                 <span>{total.toLocaleString('pt-BR', {style:'currency',currency:'BRL'})}</span>
                             </div>
+                            {
+                            (produtosCarrinho.length !== 0) &&
                             <div id="finalizar">
                                 <button id="finalizar" name="finalizarPedido"onClick={()=>finalizarPedido()} className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">Finalizar Pedido</button>
                             </div>
+                            }
                         </div>
                     </div>
 

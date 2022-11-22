@@ -1,0 +1,84 @@
+#nota { 
+    background-color: white;
+    padding: 20px;
+    border-radius:15px;
+}
+
+.descPedido{
+    display:block;
+    height: 100px;
+    margin: 0px;
+    border-bottom: 1pt  black;
+    border-style:dashed;
+}
+
+.descricao{
+    float:left;
+}
+
+.nome {
+
+    font: bold 15pt arial;
+}
+
+.quantidade {
+    float:right;
+}
+div#footer {
+    height: 50px;
+}
+button#confirmar {
+    float: right;
+    background-color: blue;
+    color: white;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    padding: 5px;
+    border-radius:15px;
+
+}
+div#pedido_confirmado {
+    position:absolute;
+    background-color: white;
+    color:black;
+    height: 500px;
+    width: 500px;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    border-radius: 15px;
+
+}
+
+#voltar {
+    position:absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 50px;
+    width: 200px;
+    background-color: blue;
+    padding: 10px;
+    border-radius: 15px;
+    color: white;
+
+
+}
+
+.vCenter{
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%, -50%);
+}
+
+div#dimm {
+    position:absolute;
+    top: 0;
+    left: 0;
+    background-color:#00000088;
+    height:100%;
+    width: 100%;
+}
