@@ -6,7 +6,6 @@ import { Link, Outlet } from "react-router-dom";
 import WasabiDBApi, { cliente, usuario, venda, vendaHasProduto } from "./wasabiDB";
 import { Cookies } from "./hooks/Cookies"
 import Navbar from "./navbar";
-import "../style/tailwind.css"
 
 
 export class App extends React.Component{
@@ -29,6 +28,11 @@ export class App extends React.Component{
       </>
 
     );
+  }
+
+  static update() {
+    //@ts-ignore
+    window.location.reload(false);
   }
 
   // sacola:Map<ProdutoId, quantidade>

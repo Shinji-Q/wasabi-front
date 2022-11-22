@@ -1,3 +1,4 @@
+import { App } from "../App";
 import WasabiDBApi, { venda, vendaHasProduto } from "../wasabiDB";
 import { Cookies } from "./Cookies";
 
@@ -23,6 +24,7 @@ export function removeOneFromSacola(produtoId:number){
 }
 export function removeFromSacola(produtoId:number){
     setProdQuant(produtoId, 0);
+    App.update();
 }
 
 export function setProdQuant(produtoId:number, quantidade: number){
@@ -34,6 +36,7 @@ export function setProdQuant(produtoId:number, quantidade: number){
     } else if (quantidade === 0) {
         console.log("removendo");
     }
+    App.update();
 }
 
 //@ts-ignore

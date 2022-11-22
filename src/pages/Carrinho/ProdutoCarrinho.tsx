@@ -3,6 +3,7 @@ import "../../../style/ProdutoCarrinho.css"
 import { Cookies } from "../../hooks/Cookies";
 import {addToSacola, setProdQuant, fecharPedido, removeOneFromSacola} from "../../hooks/Pedido";
 import React from "react";
+import { App } from "../../App";
 
 type propsProdutoCarrinho = {
     prato:prato;
