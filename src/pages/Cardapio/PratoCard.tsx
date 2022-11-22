@@ -20,26 +20,39 @@ export function PratoCard(props:PratoCardProps) {
         setInCart(true);
         setQuantidade(1)
         addToSacola(produtoId);
+        updateState();
+    }
+
+    function updateState(){
+        const quant = Cookies.sacola.get(produtoId.toString())??0;
+        if(quant === 0) {
+            setInCart(false);
+        } else {
+            setInCart(true);
+            setQuantidade(quant);
+            console.log('updatgin quantidade');
+            console.log(quant);
+            console.log(quantidade);
+        }
     }
 
     function removerDoCarrinho () {
         removeFromSacola(produtoId);
-        setQuantidade(0);
-        setInCart(false);
+        updateState();
     }
 
     function addUm(){
         addToSacola(produtoId);
-        setQuantidade(Cookies.sacola.get(produtoId.toString())??0);
-        console.log(quantidade);
+        updateState();
     }
 
     function remUm(){
-        removeOneFromSacola(produtoId);
-        setQuantidade(Cookies.sacola.get(produtoId.toString())??0);
-        if(quantidade == 0 ){
-            removerDoCarrinho();
+        if(quantidade > 1) {
+            removeOneFromSacola(produtoId);
+        } else {
+            removerDoCarrinho(produtoId);
         }
+        updateState();
     }
 
     function alterarQuantidade(ev:React.ChangeEvent<HTMLInputElement>){
@@ -78,7 +91,7 @@ export function PratoCard(props:PratoCardProps) {
                         </svg>
                     </button>
                     
-                    <input className="mx-2 border text-center w-8" type="number"  onChange={(ev)=> {alterarQuantidade(ev)}} defaultValue={1} value={quantidade}/>
+                    <input className="mx-2 border text-center w-8" type="number"  onChange={(ev)=> {alterarQuantidade(ev)}} value={quantidade}/>
 
                     <button className="botaoDeAcao" id="adicionar" onClick={(ev) => {addUm()}}>
                         <svg className="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
