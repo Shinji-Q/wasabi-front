@@ -11,11 +11,23 @@ import Navbar from "./navbar";
 export class App extends React.Component{
   constructor(props:object){
     super(props);
+    this.state = {
+      logado: Cookies.user !== null,
+    };
   }
   autenticado:boolean = true;
   render() {
-    Cookies.initTeste();
+
+    console.log('logado?');
     console.log(Cookies.user);
+
+    WasabiDBApi.getCliente(1).then( (user) => {
+
+      localStorage.setItem("user", JSON.stringify(user))
+      
+    }
+
+    )
     return (
       <>
       <Navbar />

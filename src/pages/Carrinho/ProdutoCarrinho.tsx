@@ -21,7 +21,7 @@ export class ProdutoCarrinho extends React.Component{
         this.state = {
             quantidade: this.quantidade,
         }
-        console.log(props.prato);
+        this.update = this.update.bind(this);
     }
 
     update() {
@@ -82,7 +82,7 @@ export class ProdutoCarrinho extends React.Component{
 
         console.log(Cookies.sacola.get(produtoId.toString()));
         this.update();
-        return false;
+        return true;
     }
 
     remOne(ev:React.MouseEvent<HTMLButtonElement,MouseEvent>, produtoId:number){
@@ -100,16 +100,8 @@ export class ProdutoCarrinho extends React.Component{
             const updatedAmount:number = Number.parseInt(updatedAmountStr);
             if(updatedAmount > 0){
                 setProdQuant(produtoId, updatedAmount)
-                this.updateItem(produtoId);
-                console.log('que?')
                 this.update();
             }
         }
-    }
-
-
-    updateItem(produtoId:number){
-        var desc:HTMLElement|null = window.document.getElementById(`total#${produtoId}`);
-        console.log(desc);
     }
 }

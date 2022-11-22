@@ -1,14 +1,18 @@
 import { useState } from 'react';
-import { api } from "../shared/services/api";
 import wasabiLogo from "../assets/wasabi-logo.png";
 import "../../style/Home.css"
 
 
 export function Home(){
 
-    return (
 
-    <section id="HomePage" >
+
+    return (
+        
+
+    <section id="HomePage" > 
+        <h1>Bem Vindo!</h1>
+        {/* mostrar informações de usuário */}
 
     </section>
 

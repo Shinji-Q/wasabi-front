@@ -1,4 +1,5 @@
 import { App } from "../App";
+import { redirect } from "react-router-dom";
 import WasabiDBApi, { venda, vendaHasProduto } from "../wasabiDB";
 import { Cookies } from "./Cookies";
 
@@ -10,6 +11,8 @@ export function addToSacola(produtoId:number)/*:React.MouseEventHandler<HTMLBREl
 
     //salvando a sacola localmente com cookies
     localStorage.setItem('sacola', JSON.stringify(Object.fromEntries(Cookies.sacola)))
+
+    Cookies.writeSacola();
 }
 
 
@@ -20,10 +23,12 @@ export function removeOneFromSacola(produtoId:number){
     setProdQuant(produtoId, quantidade);
     //salvando a sacola localmente com cookies
     localStorage.setItem('sacola', JSON.stringify(Object.fromEntries(Cookies.sacola)))
+
+    Cookies.writeSacola();
     
 }
 export function removeFromSacola(produtoId:number){
-    setProdQuant(produtoId, 0);
+    Cookies.sacola.delete(produtoId.toString());
     App.update();
 }
 
@@ -74,6 +79,7 @@ export async function fecharPedido():Promise<venda>{
         //juntando informações de usuário e data
         const vendafechada:venda = {
             vendaId: -1,
+            //@ts-ignore
             cliente: Cookies.user,
             vendaTotal: total,
             //@ts-ignore
@@ -85,6 +91,9 @@ export async function fecharPedido():Promise<venda>{
         
 
         const vendaConcluida = WasabiDBApi.createVenda(vendafechada)
+        vendaConcluida.then((venda) => {
+            redirect("/user/pedidos"+venda.vendaId);
+        })
         Cookies.dropSacola();
         return vendaConcluida;
     }).catch(()=>{

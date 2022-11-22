@@ -1,9 +1,10 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, redirect, useLoaderData } from "react-router-dom";
 import {Cookies} from "../hooks/Cookies"
 import WasabiDBApi, { prato } from "../wasabiDB";
 import { ProdutoCarrinho } from "./Carrinho/ProdutoCarrinho"
 import {addToSacola, removeOneFromSacola, setProdQuant, fecharPedido} from "../hooks/Pedido"
 import "../../style/ProdutoCarrinho.css"
+import { useContext } from "react";
 // recebe todos os produtos
 export async function loader() {
 
@@ -36,6 +37,10 @@ export function Cart(){
             console.log(venda);
         });
     }
+    //salvando lista de produtos para não precisar usar outro get
+    localStorage.setItem('sacola_detalhada', JSON.stringify(produtos));
+
+    
     return (
         <>
         <div className="container mx-auto mt-10">
@@ -108,12 +113,25 @@ export function Cart(){
                 </div>
             </div>
         <div id="descricao">
-
-    
+            
+            
         </div>
-
-            
-            
+            {
+            produtos.map(p => {
+                    var quantidade = Cookies.sacola.get(p.produtoId.toString())??0;
+                    total = quantidade*p.produtoPreco;
+                    //console.log(p);
+                    return (
+                        //@ts-ignore
+                        <ProdutoCarrinho prato={p}/>
+                    )
+            })
+            }
+            <div id="finalizar">
+                <Link to="/finalizar-pedido"
+                id="finalizar" 
+                >finalizar pedido</Link>
+            </div>
         </>
     )
 }

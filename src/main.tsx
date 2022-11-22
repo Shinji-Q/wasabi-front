@@ -7,6 +7,7 @@ import { Home } from "./pages/Home";
 import { Cardapio, loader as cardapioLoader } from "./pages/Cardapio";
 import { Categoria, loader as categoriaLoader } from "./pages/Cardapio/Categoria";
 import { ErrorPage } from "./pages/ErrorPage";
+import { FinalizarPedido } from "./pages/FinalizarPedido"
 import wasabiLogo from "./assets/wasabi-logo.png"
 import "../style/main.css"
 import {
@@ -19,6 +20,7 @@ import { prato } from "./wasabiDB";
 import { TestePage } from './pages/TestePage';
 import { FormularioClientePage } from "./pages/FormularioClientePage";
 
+import { UserProfile} from "./pages/UserProfile";
 
 
 const router = createBrowserRouter([
@@ -55,6 +57,16 @@ const router = createBrowserRouter([
           loader: categoriaLoader,
         }]
       },
+      {
+        
+        path:"/finalizar-pedido",
+        element: <FinalizarPedido />,
+
+      },
+      {
+        path:"/user-profile",
+        element: <UserProfile />,
+      }
     ]
   },
 ])

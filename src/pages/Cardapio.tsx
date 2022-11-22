@@ -30,7 +30,7 @@ export function Cardapio(){
                                 key={index}
                                 id = {tipo}
                             >
-                                {cat.categoriaNome}
+                                <p className="nomeCat">{cat.categoriaNome}</p>
                             </Link>
                         );
                     })
