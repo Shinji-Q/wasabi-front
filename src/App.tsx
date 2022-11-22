@@ -21,13 +21,11 @@ export class App extends React.Component{
     console.log('logado?');
     console.log(Cookies.user);
 
-    WasabiDBApi.getCliente(1).then( (user) => {
-
-      localStorage.setItem("user", JSON.stringify(user))
-      
+    if(window.location.pathname === "/"){
+      window.location.assign("/cardapio/1")
     }
 
-    )
+
     return (
       <>
       <Navbar />
