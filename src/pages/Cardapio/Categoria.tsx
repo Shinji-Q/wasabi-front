@@ -26,6 +26,7 @@ export function Categoria(props:CatProps) {
     console.log(pratosCategoria);
     return (
         <div id="cats">
+
             {pratosCategoria.map(( p, index )=> {return <div className="card" id={`card${index}`}><PratoCard key={index}  prato={p}/></div>})}
 
         </div>
